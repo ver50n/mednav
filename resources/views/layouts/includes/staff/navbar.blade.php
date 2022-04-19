@@ -1,6 +1,6 @@
-<nav class="navbar navbar-light navbar-expand-md" style="background-color: #6b7fff;">
+<nav class="navbar navbar-light navbar-expand-md"  style="background-color: #ffc9f6;">
 	<div class="navbar-brand-wrapper">
-		<a class="navbar-brand" href="{{ route('manage.dashboard') }}">
+		<a class="navbar-brand" href="{{ route('staff.dashboard') }}">
 			| @lang('common.brand') | 
 		</a>
 	</div>
@@ -14,46 +14,24 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav">
-			@if(Auth::guard('admin')->check())
+			@if(Auth::guard('web')->check())
 			<li class="nav-item">
-				<a class="nav-link" href="{{ route('manage.dashboard') }}">
+				<a class="nav-link" href="{{ route('staff.dashboard') }}">
 					<i class="c_icon fas fa-home menu-icon"></i> @lang('common.dashboard')
 				</a>
 			</li>
-			<li class="nav-item dropdown">
-				<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-					<i class="c_icon fas fa-database menu-icon"></i> @lang('common.master')
-				</a>
-				<ul class="dropdown-menu">
-					<li>
-						<a href="{{ route('manage.admin.list') }}" class="dropdown-item">
-							<i class="c_icon fas fa-user-shield menu-icon"></i> @lang('common.admin')
-						</a>
-					</li>
-					<li>
-						<a href="{{ route('manage.user.list') }}" class="dropdown-item">
-							<i class="c_icon fas fa-user menu-icon"></i> @lang('common.user')
-						</a>
-					</li>
-					<li>
-						<a href="{{ route('manage.place.list') }}" class="dropdown-item">
-							<i class="c_icon fas fa-map-marked menu-icon"></i> @lang('common.place')
-						</a>
-					</li>
-				</ul>
-            </li>
 			<li class="nav-item dropdown">
 				<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
 					<i class="c_icon fas fa-list menu-icon"></i> @lang('common.work-data')
 				</a>
 				<ul class="dropdown-menu">
 					<li>
-						<a href="{{ route('manage.callcenter.list') }}" class="dropdown-item ">
+						<a href="{{ route('staff.callcenter.list') }}" class="dropdown-item ">
 							<i class="c_icon fas fa-phone menu-icon"></i> @lang('common.callcenter')
 						</a>
 					</li>
 					<li>
-						<a href="{{ route('manage.attendance.list') }}" class="dropdown-item ">
+						<a href="{{ route('staff.attendance.list') }}" class="dropdown-item ">
 							<i class="c_icon fas fa-clipboard-list menu-icon"></i> @lang('common.attendance')
 						</a>
 					</li>
@@ -62,9 +40,9 @@
 			@endif
 		</ul>
 		<ul class="navbar-nav ml-auto">
-			@if(Auth::guard('admin')->check())
+			@if(Auth::guard('web')->check())
 			<li class="nav-item">
-				<a class="nav-link" href="{{ route('manage.setting') }}">
+				<a class="nav-link" href="{{ route('staff.setting') }}">
 					<i class="c_icon fas fa-cogs menu-icon"></i> 設定
 				</a>
 			</li>
@@ -72,7 +50,7 @@
 				<a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 					<i class="c_icon fas fa-power-off menu-icon"></i> Logout
 					<form id="logout-form"
-						action="{{ route('manage.logout')  }}"
+						action="{{ route('staff.logout')  }}"
 						method="POST"
 						style="display: none;">
 						{{ csrf_field() }}
@@ -81,7 +59,7 @@
 			</li>
 			@else
 			<li class="nav-item">
-				<a class="nav-link" href="{{ route('manage.login') }}">
+				<a class="nav-link" href="{{ route('staff.login') }}">
 				  <i class="c_icon fas fa-sign-in-alt menu-icon"></i> ログイン
 				</a>
 			</li>

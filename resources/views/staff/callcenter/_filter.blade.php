@@ -18,21 +18,6 @@
           <div class="card-body">
             <form action="{{route($routePrefix.'.list')}}" method="GET">
               <div class="form-group">
-                <label>@lang('common.user_id')</label>
-                @php
-                  $oldValue = old('user_id') ? old('user_id') : $obj->user_id;
-                @endphp
-                <select name="filters[user_id]"
-                  class="form-control input-sm">
-                  <option value=""></option>
-                @foreach(App\Models\User::get() as $each)
-                  <option value="{{$each['id']}}" {{ $oldValue == $each['id'] ? 'selected' : '' }}>
-                    {{ $each['name'] }}
-                  </option>
-                @endforeach
-                </select>
-              </div>
-              <div class="form-group">
                 <label>@lang('common.place_id')</label>
                 @php
                   $oldValue = old('place_id') ? old('place_id') : $obj->place_id;

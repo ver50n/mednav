@@ -17,3 +17,4 @@ Route::post('/helpers/activation', 'HelperController@activation')
     ->middleware([]);
 
 Route::prefix('/manage')->middleware([])->group(base_path('routes/manage/index.php'));
+Route::prefix('/')->middleware([])->group(base_path('routes/staff/index.php'));

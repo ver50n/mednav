@@ -7,9 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @yield('title')
-    @include('layouts.includes.manage.asset')
+    @include('layouts.includes.staff.asset')
     
-    @include('layouts.includes.manage.header')
+    @include('layouts.includes.staff.header')
     <style>
       .global-wrapper {
         margin-bottom: 40px;
@@ -30,7 +30,7 @@
       }
       .menu-icon {
         font-size: 0.9rem;
-        color: #ffc9f6;
+        color: #6b7fff;
       }
       .grid-action-wrapper {
         display: flex;
@@ -97,7 +97,7 @@
 
   <body>
     <div id="app" class="global-wrapper">
-      @include('layouts.includes.manage.navbar')
+      @include('layouts.includes.staff.navbar')
       <div class="overlay"></div>
       <div class="container-fluid">
         @if(session('notify'))
@@ -133,7 +133,7 @@
         </div>
         @endif
         @yield('content')
-        @include('layouts.includes.manage.footer')
+        @include('layouts.includes.staff.footer')
       </div>
     </div>
   </body>

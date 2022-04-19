@@ -1,4 +1,4 @@
-@extends('layouts.manage-layout')
+@extends('layouts.staff-layout')
 @section('content')
   <h4>@lang('common.admin')@lang('common.view')</h4>
 	<div class="grid-action-wrapper">
@@ -6,13 +6,6 @@
 			<a href="{{route($routePrefix.'.list')}}">
 				<button class="btn btn-outline-secondary">
 		      <i class="c_icon fas fa-receipt menu-icon"></i> @lang('common.list')
-				</button>
-			</a>
-		</div>
-		<div class="grid-action">
-			<a href="{{route($routePrefix.'.create')}}">
-				<button class="btn btn-outline-secondary">
-		      <i class="c_icon fas fa-plus menu-icon"></i> @lang('common.create')
 				</button>
 			</a>
 		</div>
@@ -29,6 +22,27 @@
 		      <i class="c_icon fas fa-eye menu-icon"></i> @lang('common.view')
 				</button>
 			</a>
+		</div>
+		<div class="grid-action">
+			<form action="{{route('helpers.activation')}}"
+				id="grid-action-activation"
+				method="POST"
+			>
+				@csrf
+        <input type="hidden" name="model" value="Callcenter"/>
+        <input type="hidden" name="id" value="{{$obj->id}}"/>
+			</form>
+      @if($obj->is_active == 0)
+      <button class="btn btn-success"
+        onClick="document.getElementById('grid-action-activation').submit()">
+        <i class="c_icon fas fa-check menu-icon"></i> @lang('common.activate')
+      </button>
+      @else
+      <button class="btn btn-danger"
+        onClick="document.getElementById('grid-action-activation').submit()">
+        <i class="c_icon fas fa-times menu-icon"></i> @lang('common.disactivate')
+      </button>
+      @endif
 		</div>
 	</div>
   <section class="card components__card-section-wrapper">
@@ -74,6 +88,18 @@
         id="view" class="d-block">
         <i class="c_icon fa fa-chevron-down pull-right menu-icon"> @lang('common.status-info')</label></i>
       </a>
+    </div>
+    <div id="collapse-view__status-info" class="collapse show">
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-hover table-condensed">
+          <tbody>
+            <tr>
+              <th><label>@lang('common.is_active')</label></th>
+              <td><label>{{App\Helpers\ApplicationConstant::YES_NO[$obj->is_active]}}</label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 

@@ -24,16 +24,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function scheduleParticipates()
-    {
-        return $this->hasMany(\App\Models\ScheduleParticipant::Class, 'slug', 'user_skug')->where('is_approved', 1);
-    }
-
-    public function scheduleApplies()
-    {
-        return $this->hasMany(\App\Models\ScheduleParticipant::Class, 'slug', 'user_skug')->where('is_approved', 0);
-    }
-
     public function add($data)
     {
         $validator = null;
@@ -41,6 +31,7 @@ class User extends Authenticatable
 
         try {
             $rules = [
+                'username' => 'required|unique:users',
                 'email' => 'required|unique:users|email',
                 'phone' => 'required|min:10|max:12',
                 'password' => 'required|min:6',
@@ -75,6 +66,7 @@ class User extends Authenticatable
 
         try {
             $rules = [
+                'username' => 'required|unique:users,username,'.$this->id,
                 'email' => 'required|email|unique:users,email,'.$this->id,
                 'phone' => 'min:10|max:12',
             ];

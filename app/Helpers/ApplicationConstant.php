@@ -27,11 +27,19 @@ class ApplicationConstant
         'callcenter' => 'callcenter',
         'attendance' => 'attendance',
     ];
+
     const EXCEPTION_WAGE_RATE = [
         'overtime' => 1.25,
         'night' => 1.25,
         'late_night' => 1.5,
         'holiday' => 1.35,
+    ];
+
+    const CALLCENTER_STATUS = [
+        'draft' => 'draft',
+        'open' => 'open',
+        'done' => 'done',
+        'cancel' => 'cancel',
     ];
 
     public static function getDropdown($constant)

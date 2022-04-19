@@ -68,8 +68,7 @@
         $(this).val($(this).val().replaceAll(',', ''));
       });
       return true;
-    });
-    const zeroPad = (num, places) => String(num).padStart(places, '0');
+    })
   });
 </script>
 @yield('javascript')

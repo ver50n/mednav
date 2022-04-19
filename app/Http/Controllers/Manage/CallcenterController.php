@@ -97,6 +97,38 @@ class CallcenterController extends Controller
       ->withErrors($validator);
   }
 
+  public function clone(Request $request)
+  {
+    $obj = Callcenter::findOrFail($request->id);
+
+    return view($this->viewPrefix.'.clone', [
+      'obj' => $obj,
+      'routePrefix' => $this->routePrefix,
+      'viewPrefix' => $this->viewPrefix
+    ]);
+  }
+
+  public function clonePost(Request $request)
+  {
+    $data = $request->all();
+    $obj = Callcenter::findOrFail($request->id);
+    $new = new Callcenter();
+
+    $validator = $new->register($data);
+
+    if($validator === true) {
+      return redirect()
+        ->back()
+        ->with('success', \Lang::get('common.update-succed', ['module' => \Lang::get('common.'.$this->module)]));
+    }
+
+    return redirect()
+      ->back()
+      ->with('error', \Lang::get('common.update-failed', ['module' => \Lang::get('common.'.$this->module)]))
+      ->withInput($data)
+      ->withErrors($validator);
+  }
+
   public function view(Request $request)
   {
     $obj = Callcenter::findOrFail($request->id);

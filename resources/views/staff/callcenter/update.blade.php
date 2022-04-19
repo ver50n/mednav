@@ -1,4 +1,4 @@
-@extends('layouts.manage-layout')
+@extends('layouts.staff-layout')
 @section('content')
   <h4>@lang('common.callcenter')@lang('common.update')</h4>
 	<div class="grid-action-wrapper">
@@ -6,13 +6,6 @@
 			<a href="{{route($routePrefix.'.list')}}">
 				<button class="btn btn-outline-secondary">
 		      <i class="c_icon fas fa-receipt menu-icon"></i> @lang('common.list')
-				</button>
-			</a>
-		</div>
-		<div class="grid-action">
-			<a href="{{route($routePrefix.'.create')}}">
-				<button class="btn btn-outline-secondary">
-		      <i class="c_icon fas fa-plus menu-icon"></i> @lang('common.create')
 				</button>
 			</a>
 		</div>

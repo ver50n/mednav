@@ -1,4 +1,4 @@
-@extends('layouts.manage-layout')
+@extends('layouts.staff-layout')
 
 @section('content')
 <div class="container-wrapper">
@@ -11,13 +11,6 @@
         @include($viewPrefix.'._filter', ['obj' => $obj])
       </div>
       
-      <div class="grid-action">
-        <a href="{{route($routePrefix.'.create')}}">
-          <button class="btn btn-outline-secondary">
-            <i class="c_icon fas fa-plus menu-icon"></i> @lang('common.create')
-          </button>
-        </a>
-      </div>
       <div class="grid-action">
         <form action="{{route('helpers.export').'?'.http_build_query(Request::query())}}" method="POST">
           @csrf
@@ -34,7 +27,6 @@
       'headers' => [
         'action' => ['sortable' => false, 'title' => trans('common.action')],
         'date_period' => ['sortable' => true, 'title' => trans('common.date_period')],
-        'user_id' => ['sortable' => true, 'title' => trans('common.user_id')],
         'place' => ['sortable' => true, 'title' => trans('common.place')],
         'working_hour' => ['sortable' => false, 'title' => trans('common.working-info')],
         'actual_working_hour' => ['sortable' => false, 'title' => trans('common.actual-working-info')],
@@ -62,13 +54,6 @@
               </a>
             </div>
             <div class="icon-wrapper">
-              <a href="{{route($routePrefix.'.clone', ['id' => $row->id])}}">
-                <span class="action-icon">
-                  <i class="c_icon icon fas fa-copy menu-icon" title="copy"></i>
-                </span>
-              </a>
-            </div>
-            <div class="icon-wrapper">
             <form class="form-grid-delete"
               id="form-grid-delete"
               action="{{ route('manage.callcenter.delete', ['id' => $row->id]) }}"
@@ -84,7 +69,6 @@
             </div>
           </td>
           <td>{{$row->date_period}}</td>
-          <td>{{$row->user->name}}</td>
           <td>{{$row->place->name}}</td>
           <td>
             <b>@lang('common.time_start')</b><br />
@@ -117,8 +101,6 @@
             {{ App\Utils\NumberUtil::currencyFormat($row->handling_fee, $currency = 'JPY', $options = []) }}<br />
             <b>@lang('common.user_payment')</b><br />
             <b>{{ App\Utils\NumberUtil::currencyFormat($row->user_payment, $currency = 'JPY', $options = []) }}</b><br />
-            <b>@lang('common.actual_payment')</b><br />
-            <b>{{ App\Utils\NumberUtil::currencyFormat($row->actual_payment, $currency = 'JPY', $options = []) }}</b><br />
           </td>
           <td>{{ \Lang::get('application-constant.CALLCENTER_STATUS.'.$row->status) }}</td>
         </tr>

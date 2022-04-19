@@ -83,4 +83,16 @@ class PlaceHourlyWage extends Model
 
         return true;
     }
+
+    public static function getWages($data)
+    {
+        $wage = null;
+        $wage = PlaceHourlyWage::where([
+            "place_id" => $data["place_id"],
+            "shift" => $data["shift"],
+            "jobtype" => $data["jobtype"]
+        ])->first();
+
+        return $wage;
+    }
 }

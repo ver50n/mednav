@@ -1,22 +1,21 @@
 <?php
-namespace App\Http\Controllers\Manage;
+namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
-use App\Models\Place;
-use App\Models\PlaceHourlyWage;
+use App\Models\Attendance;
 
-class PlaceController extends Controller
+class AttendanceController extends Controller
 {
-  public $routePrefix = 'manage.place';
-  public $viewPrefix = 'manage.place';
-  public $module = 'place';
+  public $routePrefix = 'staff.attendance';
+  public $viewPrefix = 'staff.attendance';
+  public $module = 'attendance';
 
   public function list(Request $request)
   {
-    $obj = new Place();
+    $obj = new Attendance();
     $filters = $request->query('filters');
     $page = $request->query('page');
     $sort = $request->query('sort');
@@ -39,7 +38,7 @@ class PlaceController extends Controller
 
   public function create()
   {
-    $obj = new Place();
+    $obj = new Attendance();
 
     return view($this->viewPrefix.'.create', [
       'obj' => $obj,
@@ -51,9 +50,9 @@ class PlaceController extends Controller
   public function createPost(Request $request)
   {
     $data = $request->all();
-    $place = new Place();
+    $admin = new Attendance();
 
-    $validator = $place->add($data);
+    $validator = $admin->register($data);
 
     if($validator === true) {
       return redirect()->route($this->routePrefix.'.list')
@@ -69,12 +68,10 @@ class PlaceController extends Controller
 
   public function update(Request $request)
   {
-    $obj = Place::findOrFail($request->id);
-    $wages = [];
+    $obj = Attendance::findOrFail($request->id);
 
     return view($this->viewPrefix.'.update', [
       'obj' => $obj,
-      'wages' => $wages,
       'routePrefix' => $this->routePrefix,
       'viewPrefix' => $this->viewPrefix
     ]);
@@ -83,7 +80,7 @@ class PlaceController extends Controller
   public function updatePost(Request $request)
   {
     $data = $request->all();
-    $obj = Place::findOrFail($request->id);
+    $obj = Attendance::findOrFail($request->id);
 
     $validator = $obj->edit($data);
 
@@ -102,7 +99,7 @@ class PlaceController extends Controller
 
   public function view(Request $request)
   {
-    $obj = Place::findOrFail($request->id);
+    $obj = Attendance::findOrFail($request->id);
 
     return view($this->viewPrefix.'.view', [
       'obj' => $obj,
@@ -113,41 +110,10 @@ class PlaceController extends Controller
 
   public function delete(Request $request)
   {
-    $obj = Place::findOrFail($request->id);
+    $obj = Attendance::findOrFail($request->id);
     $obj->delete();
 
     return redirect()->route($this->routePrefix.'.list')
       ->with('success', \Lang::get('common.delete-succed', ['module' => \Lang::get('common.'.$this->module)]));
-  }
-
-  public function updateWagePost(Request $request)
-  {
-    $placeId = $request->place_id;
-    $obj = Place::findOrFail($placeId);
-    $data = $request->all();
-    
-    $validator = PlaceHourlyWage::setPlaceHourlyWages($data);
-
-    if($validator === true) {
-      return redirect()
-        ->back()
-        ->with('success', \Lang::get('common.update-wage-succed', ['module' => \Lang::get('common.'.$this->module)]));
-    }
-
-    return redirect()
-      ->back()
-      ->with('error', \Lang::get('common.update-wage-failed', ['module' => \Lang::get('common.'.$this->module)]))
-      ->withInput($data)
-      ->withErrors($validator);
-  }
-
-  public function getWages(Request $request)
-  {
-    $placeId = $request->id;
-    $obj = Place::findOrFail($placeId);
-    $data = $request->all();
-
-    $wages = PlaceHourlyWage::getWages($data);
-    return $wages->toJson();
   }
 }

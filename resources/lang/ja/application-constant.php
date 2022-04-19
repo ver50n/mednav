@@ -27,4 +27,12 @@
             'no' => 'いいえ',
             'yes' => 'はい'
         ],
+        'CALLCENTER_STATUS' => [
+            'draft' => 'ドラフト',
+            'open' => 'オープン',
+            'request' => '承認待ち',
+            'approved' => '承認済み',
+            'rejected' => '否定済み',
+            'cancel' => 'キャンセル',
+        ],
     ];

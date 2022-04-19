@@ -31,3 +31,6 @@
   Route::post('/{id}/delete', $controller.'@delete')
     ->name($module.'.delete')
     ->middleware([]);
+  Route::get('/{id}/get-wages', $controller.'@getWages')
+    ->name($module.'.getWages')
+    ->middleware([]);

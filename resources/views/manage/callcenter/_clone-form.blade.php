@@ -1,5 +1,5 @@
-<section class="component__update-form">
-  <form action="{{route($routePrefix.'.updatePost', ['id' => $obj->id])}}"
+<section class="component__clone-form">
+  <form action="{{route($routePrefix.'.clonePost', ['id' => $obj->id])}}"
     method="POST"
     enctype="multipart/form-data">
     @csrf
@@ -403,7 +403,7 @@
       stepMinute: 15,
     });
 
-    $('#actual_time_rest, #actual_overtime_start, #actual_overtime_end').timepicker({
+    $('#actual_time_rest').timepicker({
       timeFormat: "HH:mm",
       stepMinute: 15,
     });

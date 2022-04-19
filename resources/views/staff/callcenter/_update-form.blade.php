@@ -22,6 +22,7 @@
                   $oldValue = old('user_id') ? old('user_id') : $obj->user_id;
                 @endphp
                 <select name="user_id"
+                  readonly
                   class="form-control input-sm">
                 @foreach(App\Models\User::get() as $each)
                   <option value="{{$each['id']}}" {{ $oldValue == $each['id'] ? 'selected' : '' }}>
@@ -36,6 +37,7 @@
                   $oldValue = old('place_id') ? old('place_id') : $obj->place_id;
                 @endphp
                 <select name="place_id"
+                  readonly
                   id="place_id"
                   class="form-control input-sm">
                 @foreach(App\Models\Place::get() as $each)
@@ -48,6 +50,7 @@
               <div class="form-group">
                 <label>@lang('common.date_period')</label> <span class="e_required">*</span>
                 <input class="form-control input-sm"
+                  readonly
                   name="date_period"
                   id="date_period"
                   value="{{old('date_period') ? old('date_period') : $obj->date_period}}"
@@ -60,6 +63,7 @@
                   $oldValue = old('shift') ? old('shift') : $obj->shift;
                 @endphp
                 <select name="shift"
+                  readonly
                   id="shift"
                   class="form-control input-sm">
                 @foreach(App\Helpers\ApplicationConstant::WORKING_SHIFT as $key => $value)
@@ -89,6 +93,7 @@
               <div class="form-group">
                 <label>@lang('common.time_start')</label> <span class="e_required">*</span>
                 <input class="form-control input-sm"
+                  readonly
                   name="time_start"
                   id="time_start"
                   value="{{ old('time_start') ? old('time_start') : $obj->time_start->format('Y-m-d H:i') }}"
@@ -98,6 +103,7 @@
               <div class="form-group">
                 <label>@lang('common.time_end')</label> <span class="e_required">*</span>
                 <input class="form-control input-sm"
+                  readonly
                   name="time_end"
                   id="time_end"
                   value="{{ old('time_end') ? old('time_end') : $obj->time_end->format('Y-m-d H:i') }}"
@@ -107,20 +113,13 @@
               <div class="form-group">
                 <label>@lang('common.working_hour')</label> <span class="e_required">*</span>
                 <input class="form-control input-sm"
+                  readonly
                   name="working_hour"
                   id="working_hour"
                   readOnly
                   value="{{ old('working_hour') ? old('working_hour') : $obj->working_hour }}"
                   placeholder="@lang('common.working_hour')" />
                 <span class="c_form__error-block">{{$errors->first('working_hour')}}</span>
-              </div>
-              
-              <div>
-                <button type="submit" class="btn btn-outline-primary">
-                  <span class="action-icon">
-                    <i class="c_icon fas fa-save menu-icon"></i> @lang('common.save')
-                  </span>
-                </button>
               </div>
             </div>
           </div>
@@ -168,6 +167,14 @@
                   placeholder="@lang('common.actual_time_rest')" />
                 <span class="c_form__error-block">{{$errors->first('actual_time_rest')}}</span>
               </div>
+              
+              <div>
+                <button type="submit" class="btn btn-outline-primary">
+                  <span class="action-icon">
+                    <i class="c_icon fas fa-save menu-icon"></i> @lang('common.save')
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
         </section>
@@ -206,6 +213,14 @@
                   value="{{ old('transport_fee') ? old('transport_fee') : $obj->transport_fee }}"
                   placeholder="@lang('common.transport_fee')" />
                 <span class="c_form__error-block">{{$errors->first('transport_fee')}}</span>
+              </div>
+              
+              <div>
+                <button type="submit" class="btn btn-outline-primary">
+                  <span class="action-icon">
+                    <i class="c_icon fas fa-save menu-icon"></i> @lang('common.save')
+                  </span>
+                </button>
               </div>
             </div>
           </div>
@@ -359,18 +374,6 @@
                         readOnly
                         placeholder="@lang('common.user_payment')" />
                       <span class="c_form__error-block">{{$errors->first('user_payment')}}</span>
-                    </label></td>
-                  </tr>
-                  <tr>
-                    <th><label><label>@lang('common.actual_payment')</label> <span class="e_required">*</span></label></th>
-                    <td><label>
-                      <input class="form-control input-sm price-field"
-                        name="actual_payment"
-                        id="actual_payment"
-                        value="{{ old('actual_payment') ? old('actual_payment') : $obj->actual_payment }}"
-                        readOnly
-                        placeholder="@lang('common.actual_payment')" />
-                      <span class="c_form__error-block">{{$errors->first('actual_payment')}}</span>
                     </label></td>
                   </tr>
                 </tbody>

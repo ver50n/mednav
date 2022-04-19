@@ -1,6 +1,6 @@
 <?php
-  $module = 'manage.callcenter';
-  $controller = 'Manage\CallcenterController';
+  $module = 'staff.attendance';
+  $controller = 'Staff\AttendanceController';
   Route::get('/', $controller.'@list')
     ->name($module.'.list')
     ->middleware([]);
@@ -18,12 +18,6 @@
     ->middleware([]);
   Route::get('/{id}/view', $controller.'@view')
     ->name($module.'.view')
-    ->middleware([]);
-  Route::get('/{id}/clone', $controller.'@clone')
-    ->name($module.'.clone')
-    ->middleware([]);
-  Route::post('/{id}/clone', $controller.'@clonePost')
-    ->name($module.'.clonePost')
     ->middleware([]);
   Route::post('/{id}/active', $controller.'@active')
     ->name($module.'.active')
