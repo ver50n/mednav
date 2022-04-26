@@ -5,7 +5,7 @@
 <section class="component__grid-pagination">
 	<div class="row">
   	<div class="col-sm">
-  		<select class="form-control input-sm grids-control-records-per-page"
+  		<select class="form-control form-control-sm grids-control-records-per-page"
 				style="display: inline; width: 80px; margin-right: 10px;">
       @foreach($rowPerPageOptions as $rppo)
 			  <option value="{{ $rppo }}" @php echo ($rppo == $rowPerPage) ? "selected" : "";  @endphp>{{ $rppo }}</option>

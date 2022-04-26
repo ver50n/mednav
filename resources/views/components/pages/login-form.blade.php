@@ -6,7 +6,7 @@
       <div class="e_separator-line"></div>
       <div class="form-group">
         <label>@lang('common.username') </label> <span class="e_required">*</span>
-        <input class="form-control input-sm"
+        <input class="form-control form-control-sm"
           type="text"
           name="username"
           value="{{old('username')}}"
@@ -16,7 +16,7 @@
       </div>
       <div class="form-group">
         <label>@lang('common.password') </label> <span class="e_required">*</span>
-        <input class="form-control input-sm"
+        <input class="form-control form-control-sm"
           type="password"
           name="password"
           value="{{old('password')}}"

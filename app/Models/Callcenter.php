@@ -63,14 +63,15 @@ class Callcenter extends Model
                 'handling_fee' => 'required|numeric',
                 'transport_fee' => 'required|numeric',
                 'actual_working_hour' => 'required',
-                'actual_overtime_start' => 'required',
-                'actual_overtime_end' => 'required',
                 'actual_overtime' => 'required',
-                'normal_wage' => 'required|numeric',
+                'morning_wage' => 'required|numeric',
+                'noon_wage' => 'required|numeric',
                 'night_wage' => 'required|numeric',
-                'late_night_wage' => 'required|numeric',
+                'night_overtime_wage' => 'required|numeric',
                 'overtime_wage' => 'required|numeric',
                 'holiday_wage' => 'required|numeric',
+                'actual_working_hour_payment' => 'required|numeric',
+                'actual_overtime_hour_payment' => 'required|numeric',
                 'user_payment' => 'required|numeric',
                 'actual_payment' => 'required|numeric',
             ];
@@ -99,42 +100,13 @@ class Callcenter extends Model
 
         try {
             $rules = [
-                'user_id' => [
-                    'required',
-                    Rule::exists('users', 'id')->where(function ($query) {
-                        return $query->where('is_active', 1);
-                    }),
-                ],
-                'place_id' => [
-                    'required',
-                    Rule::exists('places', 'id')->where(function ($query) {
-                        return $query->where('is_active', 1);
-                    }),
-                ],
-                'date_period' => 'required|date',
-                'shift' => [
-                    'required',
-                    Rule::in(array_keys(\App\Helpers\ApplicationConstant::WORKING_SHIFT)),
-                ],
-                'time_start' => 'required|date_format:Y-m-d H:i',
-                'time_end' => 'required|date_format:Y-m-d H:i',
-                'working_hour' => 'required',
                 'actual_time_start' => 'required|date_format:Y-m-d H:i',
                 'actual_time_end' => 'required|date_format:Y-m-d H:i',
                 'actual_time_rest' => 'required',
-                'handling_fee' => 'required|numeric',
                 'transport_fee' => 'required|numeric',
-                'actual_working_hour' => 'required',
-                'actual_overtime_start' => 'required',
-                'actual_overtime_end' => 'required',
-                'actual_overtime' => 'required',
-                'normal_wage' => 'required|numeric',
-                'night_wage' => 'required|numeric',
-                'late_night_wage' => 'required|numeric',
-                'overtime_wage' => 'required|numeric',
-                'holiday_wage' => 'required|numeric',
+                'actual_working_hour_payment' => 'required|numeric',
+                'actual_overtime_hour_payment' => 'required|numeric',
                 'user_payment' => 'required|numeric',
-                'actual_payment' => 'required|numeric',
             ];
 
             $validator = Validator::make($data, $rules);
@@ -150,6 +122,14 @@ class Callcenter extends Model
             \Log::error($e->getMessage());
             return $validator->getMessageBag()->add('user_id', $e->getMessage());
         }
+    }
+
+    public function request()
+    {
+        $this->status = "request";
+        $this->save();
+        
+        return true;
     }
 
     public function filter($filters, $options = [])

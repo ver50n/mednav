@@ -23,7 +23,7 @@
                   $oldValue = old('user_id') ? old('user_id') : $obj->user_id;
                 @endphp
                 <select name="filters[user_id]"
-                  class="form-control input-sm">
+                  class="form-control form-control-sm">
                   <option value=""></option>
                 @foreach(App\Models\User::get() as $each)
                   <option value="{{$each['id']}}" {{ $oldValue == $each['id'] ? 'selected' : '' }}>
@@ -38,7 +38,7 @@
                   $oldValue = old('place_id') ? old('place_id') : $obj->place_id;
                 @endphp
                 <select name="filters[place_id]"
-                  class="form-control input-sm">
+                  class="form-control form-control-sm">
                   <option value=""></option>
                 @foreach(App\Models\Place::get() as $each)
                   <option value="{{$each['id']}}" {{ $oldValue == $each['id'] ? 'selected' : '' }}>
@@ -53,7 +53,7 @@
                   $oldValue = old('shift') ? old('shift') : $obj->shift;
                 @endphp
                 <select name="filters[shift]"
-                  class="form-control input-sm">
+                  class="form-control form-control-sm">
                   <option value=""></option>
                 @foreach(App\Helpers\ApplicationConstant::WORKING_SHIFT as $each => $value)
                   <option value="{{$each}}" {{ $oldValue == $each ? 'selected' : '' }}>
@@ -67,13 +67,13 @@
 
                 <div class="form-row">
                   <div class="col-md-4 mb-3">
-                    <input class="form-control input-sm"
+                    <input class="form-control form-control-sm"
                       name="filters[date_period_start]"
                       id="date_period_start"
                       value="{{old('date_period_start') ? old('date_period_start') : $obj->date_period_start}}" />
                   </div>
                   <div class="col-md-4 mb-3">
-                    <input class="form-control input-sm"
+                    <input class="form-control form-control-sm"
                       name="filters[date_period_end]"
                       id="date_period_end"
                       value="{{old('date_period_end') ? old('date_period_end') : $obj->date_period_end}}" />

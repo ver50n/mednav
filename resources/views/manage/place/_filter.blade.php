@@ -19,14 +19,14 @@
             <form action="{{route($routePrefix.'.list')}}" method="GET">
               <div class="form-group">
                 <label>@lang('common.id')</label>
-                <input class="form-control input-sm"
+                <input class="form-control form-control-sm"
                   name="filters[id]"
                   value="{{$obj->id}}"
                   autocomplete="off" />
               </div>
               <div class="form-group">
                 <label>@lang('common.name')</label>
-                <input class="form-control input-sm"
+                <input class="form-control form-control-sm"
                   name="filters[name]"
                   value="{{$obj->name}}"
                   autocomplete="off" />

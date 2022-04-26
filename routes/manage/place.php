@@ -19,6 +19,9 @@
   Route::post('/{id}/update-wage', $controller.'@updateWagePost')
     ->name($module.'.updateWagePost')
     ->middleware([]);
+  Route::post('/{id}/update-shift', $controller.'@updateShiftPost')
+    ->name($module.'.updateShiftPost')
+    ->middleware([]);
   Route::get('/{id}/view', $controller.'@view')
     ->name($module.'.view')
     ->middleware([]);
@@ -34,3 +37,6 @@
   Route::get('/{id}/get-wages', $controller.'@getWages')
     ->name($module.'.getWages')
     ->middleware([]);
+    Route::get('/{id}/get-shift', $controller.'@getShift')
+      ->name($module.'.getShift')
+      ->middleware([]);

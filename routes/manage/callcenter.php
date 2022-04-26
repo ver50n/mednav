@@ -19,12 +19,6 @@
   Route::get('/{id}/view', $controller.'@view')
     ->name($module.'.view')
     ->middleware([]);
-  Route::get('/{id}/clone', $controller.'@clone')
-    ->name($module.'.clone')
-    ->middleware([]);
-  Route::post('/{id}/clone', $controller.'@clonePost')
-    ->name($module.'.clonePost')
-    ->middleware([]);
   Route::post('/{id}/active', $controller.'@active')
     ->name($module.'.active')
     ->middleware([]);

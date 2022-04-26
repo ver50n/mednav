@@ -16,7 +16,7 @@
         ],
         'WORKING_SHIFT' => [
             'morning' => '朝',
-            'afternoon' => '昼',
+            'noon' => '昼',
             'night' => '夜',
         ],
         'JOBTYPE' => [
@@ -33,6 +33,7 @@
             'request' => '承認待ち',
             'approved' => '承認済み',
             'rejected' => '否定済み',
+            'finished' => '完了',
             'cancel' => 'キャンセル',
         ],
     ];

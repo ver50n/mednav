@@ -5,7 +5,7 @@
     @csrf
     <div class="form-group">
       <label>@lang('common.name')</label> <span class="e_required">*</span>
-      <input class="form-control input-sm"
+      <input class="form-control form-control-sm"
         name="name"
         value="{{old('name') ? old('name') : $obj->name}}"
         placeholder="@lang('common.name')" />

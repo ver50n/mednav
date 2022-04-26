@@ -16,6 +16,9 @@
   Route::post('/{id}/update', $controller.'@updatePost')
     ->name($module.'.updatePost')
     ->middleware([]);
+  Route::get('/{id}/request', $controller.'@request')
+    ->name($module.'.request')
+    ->middleware([]);
   Route::get('/{id}/view', $controller.'@view')
     ->name($module.'.view')
     ->middleware([]);

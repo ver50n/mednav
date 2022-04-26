@@ -9,6 +9,7 @@
 				</button>
 			</a>
 		</div>
+    @if($obj->status == "open")
 		<div class="grid-action">
 			<a href="{{route($routePrefix.'.update', ['id' => $obj->id])}}">
 				<button class="btn btn-outline-secondary">
@@ -16,6 +17,15 @@
 				</button>
 			</a>
 		</div>
+		
+		<div class="grid-action">
+			<a href="{{route($routePrefix.'.request', ['id' => $obj->id])}}">
+				<button class="btn btn-outline-secondary">
+		      <i class="c_icon fas fa-eye menu-icon"></i> @lang('common.request')
+				</button>
+			</a>
+		</div>
+    @endif
 		<div class="grid-action">
 			<a href="{{route($routePrefix.'.view', ['id' => $obj->id])}}">
 				<button class="btn btn-outline-secondary">

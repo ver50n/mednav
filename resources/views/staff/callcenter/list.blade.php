@@ -30,7 +30,6 @@
         'place' => ['sortable' => true, 'title' => trans('common.place')],
         'working_hour' => ['sortable' => false, 'title' => trans('common.working-info')],
         'actual_working_hour' => ['sortable' => false, 'title' => trans('common.actual-working-info')],
-        'actual_overtime' => ['sortable' => false, 'title' => trans('common.actual_overtime')],
         'actual_payment' => ['sortable' => false, 'title' => trans('common.actual-summary-info')],
         'status' => ['sortable' => true, 'title' => trans('common.status')],
       ]
@@ -46,6 +45,7 @@
                 </span>
               </a>
             </div>
+            @if($row->status == "open")
             <div class="icon-wrapper">
               <a href="{{route($routePrefix.'.update', ['id' => $row->id])}}">
                 <span class="action-icon">
@@ -53,20 +53,7 @@
                 </span>
               </a>
             </div>
-            <div class="icon-wrapper">
-            <form class="form-grid-delete"
-              id="form-grid-delete"
-              action="{{ route('manage.callcenter.delete', ['id' => $row->id]) }}"
-              method="POST"
-              style="display: none;">
-            @csrf
-            </form>
-              <a href="#" class="grid-delete" onClick="document.getElementById('form-grid-delete').submit()">
-                <span class="action-icon">
-                  <i class="c_icon icon fas fa-trash menu-icon" title="delete"></i>
-                </span>
-              </a>
-            </div>
+            @endif
           </td>
           <td>{{$row->date_period}}</td>
           <td>{{$row->place->name}}</td>
@@ -85,20 +72,16 @@
             {{$row->actual_time_end}}<br />
             <b>@lang('common.actual_working_hour')</b><br />
             <b>{{$row->actual_working_hour}}</b><br />
-          </td>
-          <td>
-            <b>@lang('common.actual_overtime_start')</b><br />
-            {{$row->actual_overtime_start}}<br />
-            <b>@lang('common.actual_overtime_end')</b><br />
-            {{$row->actual_overtime_end}}<br />
             <b>@lang('common.actual_overtime')</b><br />
             <b>{{$row->actual_overtime}}</b><br />
           </td>
           <td>
+            <b>@lang('common.actual_working_hour_payment')</b><br />
+            {{ App\Utils\NumberUtil::currencyFormat($row->actual_working_hour_payment, $currency = 'JPY', $options = []) }}<br />
+            <b>@lang('common.actual_overtime_hour_payment')</b><br />
+            {{ App\Utils\NumberUtil::currencyFormat($row->actual_overtime_hour_payment, $currency = 'JPY', $options = []) }}<br />
             <b>@lang('common.transport_fee')</b><br />
             {{ App\Utils\NumberUtil::currencyFormat($row->transport_fee, $currency = 'JPY', $options = []) }}<br />
-            <b>@lang('common.handling_fee')</b><br />
-            {{ App\Utils\NumberUtil::currencyFormat($row->handling_fee, $currency = 'JPY', $options = []) }}<br />
             <b>@lang('common.user_payment')</b><br />
             <b>{{ App\Utils\NumberUtil::currencyFormat($row->user_payment, $currency = 'JPY', $options = []) }}</b><br />
           </td>

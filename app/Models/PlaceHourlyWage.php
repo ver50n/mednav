@@ -36,13 +36,10 @@ class PlaceHourlyWage extends Model
                     'required',
                     Rule::in(array_keys(\App\Helpers\ApplicationConstant::JOBTYPE)),
                 ],
-                'shift' => [
-                    'required',
-                    Rule::in(array_keys(\App\Helpers\ApplicationConstant::WORKING_SHIFT)),
-                ],
-                'normal_wage' => 'required|numeric',
+                'morning_wage' => 'required|numeric',
+                'noon_wage' => 'required|numeric',
                 'night_wage' => 'required|numeric',
-                'late_night_wage' => 'required|numeric',
+                'night_overtime_wage' => 'required|numeric',
                 'overtime_wage' => 'required|numeric',
                 'holiday_wage' => 'required|numeric',
             ];
@@ -66,14 +63,14 @@ class PlaceHourlyWage extends Model
     {
         PlaceHourlyWage::where(["place_id" => $data["place_id"]])->delete();
         
-        for($i = 0; $i < count($data["shift"]); $i++) {
+        for($i = 0; $i < count($data["jobtype"]); $i++) {
             $wageData = [
                 "place_id" => $data["place_id"],
-                "shift" => $data["shift"][$i],
                 "jobtype" => $data["jobtype"][$i],
-                "normal_wage" => $data["normal_wage"][$i],
+                "morning_wage" => $data["morning_wage"][$i],
+                "noon_wage" => $data["noon_wage"][$i],
                 "night_wage" => $data["night_wage"][$i],
-                "late_night_wage" => $data["late_night_wage"][$i],
+                "night_overtime_wage" => $data["night_overtime_wage"][$i],
                 "overtime_wage" => $data["overtime_wage"][$i],
                 "holiday_wage" => $data["holiday_wage"][$i],
             ];
@@ -89,7 +86,6 @@ class PlaceHourlyWage extends Model
         $wage = null;
         $wage = PlaceHourlyWage::where([
             "place_id" => $data["place_id"],
-            "shift" => $data["shift"],
             "jobtype" => $data["jobtype"]
         ])->first();
 

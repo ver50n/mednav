@@ -10,7 +10,7 @@
           @csrf
           <div class="form-group">
             <label>@lang('validation.attributes.name') <span class="e_required">*</span> </label>
-            <input class="form-control input-sm"
+            <input class="form-control form-control-sm"
               type="text"
               name="name"
               required
@@ -23,7 +23,7 @@
 
           <div class="form-group">
             <label>@lang('validation.attributes.email') <span class="e_required">*</span> </label>
-            <input class="form-control input-sm"
+            <input class="form-control form-control-sm"
               type="email"
               name="email"
               required
@@ -36,7 +36,7 @@
 
           <div class="form-group">
             <label>@lang('validation.attributes.is_active') <span class="e_required">*</span> </label><small id="isActiveHelp" class="form-text text-muted">アカウント無効化になるので、気を付けてください！</small>
-            <select class="form-control input-sm" id="type"
+            <select class="form-control form-control-sm" id="type"
               name="is_active">
               @foreach(\App\Helpers\ApplicationConstant::YES_NO as $value => $label)
               <option value="{{ $value }}"
@@ -65,7 +65,7 @@
           @csrf
           <div class="form-group">
             <label>@lang('validation.attributes.password') <span class="e_required">*</span> </label>
-            <input class="form-control input-sm"
+            <input class="form-control form-control-sm"
               type="password"
               name="password"
               placeholder="@lang('validation.attributes.password')"
@@ -74,7 +74,7 @@
           </div>
           <div class="form-group">
             <label>@lang('validation.attributes.new_password') <span class="e_required">*</span> </label>
-            <input class="form-control input-sm"
+            <input class="form-control form-control-sm"
               type="password"
               name="new_password"
               placeholder="@lang('validation.attributes.new_password')"
@@ -83,7 +83,7 @@
           </div>
           <div class="form-group">
             <label>@lang('validation.attributes.new_password_confirmation') <span class="e_required">*</span> </label>
-            <input class="form-control input-sm"
+            <input class="form-control form-control-sm"
               type="password"
               name="new_password_confirmation"
               placeholder="@lang('validation.attributes.new_password_confirmation')"

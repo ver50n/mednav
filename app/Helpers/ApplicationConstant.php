@@ -19,7 +19,7 @@ class ApplicationConstant
 
     const WORKING_SHIFT = [
         'morning' => 'morning',
-        'afternoon' => 'afternoon',
+        'noon' => 'noon',
         'night' => 'night',
     ];
 
@@ -29,16 +29,21 @@ class ApplicationConstant
     ];
 
     const EXCEPTION_WAGE_RATE = [
-        'overtime' => 1.25,
+        'morning' => 1,
+        'noon' => 1,
         'night' => 1.25,
-        'late_night' => 1.5,
+        'overtime' => 1.25,
+        'night_overtime' => 1.5,
         'holiday' => 1.35,
     ];
 
     const CALLCENTER_STATUS = [
         'draft' => 'draft',
         'open' => 'open',
-        'done' => 'done',
+        'request' => 'request',
+        'approved' => 'approved',
+        'rejected' => 'rejected',
+        'finished' => 'finished',
         'cancel' => 'cancel',
     ];
 

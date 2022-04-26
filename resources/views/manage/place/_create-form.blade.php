@@ -5,7 +5,7 @@
     @csrf
     <div class="form-group">
       <label>@lang('common.name')</label> <span class="e_required">*</span>
-      <input class="form-control input-sm"
+      <input class="form-control form-control-sm"
         name="name"
         value="{{old('name')}}"
         placeholder="@lang('common.name')" />
@@ -13,14 +13,14 @@
     </div>
     <div class="form-group">
       <label>@lang('common.address')</label>
-      <textarea class="form-control input-sm"
+      <textarea class="form-control form-control-sm"
         name="address"
         placeholder="@lang('common.address')"> {{old('desc')}} </textarea>
       <span class="c_form__error-block">{{$errors->first('address')}}</span>
     </div>
     <div class="form-group">
       <label>@lang('common.desc')</label>
-      <textarea class="form-control input-sm"
+      <textarea class="form-control form-control-sm"
         name="desc"
         placeholder="@lang('common.desc')"> {{old('desc')}} </textarea>
       <span class="c_form__error-block">{{$errors->first('desc')}}</span>

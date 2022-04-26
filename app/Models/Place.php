@@ -13,9 +13,14 @@ class Place extends Model
     public $table = 'places';
     protected $guarded = [];
 
-    public function placeHourlywages()
+    public function placeHourlyWages()
     {
         return $this->hasMany(\App\Models\PlaceHourlyWage::Class);
+    }
+
+    public function placeShiftHours()
+    {
+        return $this->hasMany(\App\Models\PlaceShiftHour::Class);
     }
 
     public function add($data)

@@ -40,36 +40,6 @@ class CallcenterController extends Controller
     ]);
   }
 
-  public function create()
-  {
-    $obj = new Callcenter();
-
-    return view($this->viewPrefix.'.create', [
-      'obj' => $obj,
-      'routePrefix' => $this->routePrefix,
-      'viewPrefix' => $this->viewPrefix
-    ]);
-  }
-
-  public function createPost(Request $request)
-  {
-    $data = $request->all();
-    $admin = new Callcenter();
-
-    $validator = $admin->register($data);
-
-    if($validator === true) {
-      return redirect()->route($this->routePrefix.'.list')
-        ->with('success', \Lang::get('common.create-succed', ['module' => \Lang::get('common.'.$this->module)]));
-    }
-
-    return redirect()
-      ->back()
-      ->with('error', \Lang::get('common.create-failed', ['module' => \Lang::get('common.'.$this->module)]))
-      ->withInput($data)
-      ->withErrors($validator);
-  }
-
   public function update(Request $request)
   {
     $obj = Callcenter::findOrFail($request->id);
@@ -112,12 +82,13 @@ class CallcenterController extends Controller
     ]);
   }
 
-  public function delete(Request $request)
+  public function request(Request $request)
   {
     $obj = Callcenter::findOrFail($request->id);
-    $obj->delete();
+    $obj->request();
 
-    return redirect()->route($this->routePrefix.'.list')
-      ->with('success', \Lang::get('common.delete-succed', ['module' => \Lang::get('common.'.$this->module)]));
+    return redirect()
+      ->back()
+      ->with('success', \Lang::get('common.request-succed', ['module' => \Lang::get('common.'.$this->module)]));
   }
 }

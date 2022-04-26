@@ -6,7 +6,7 @@
       <div class="e_separator-line"></div>
       <div class="form-group">
         <label>@lang('validation.attributes.name') </label> <span class="e_required">*</span>
-        <input class="form-control input-sm"
+        <input class="form-control form-control-sm"
           type="text"
           name="name"
           value="{{old('name')}}"
@@ -16,7 +16,7 @@
       </div>
       <div class="form-group">
         <label>@lang('validation.attributes.email') </label> <span class="e_required">*</span>
-        <input class="form-control input-sm"
+        <input class="form-control form-control-sm"
           type="text"
           name="email"
           value="{{old('email')}}"
@@ -26,7 +26,7 @@
       </div>
       <div class="form-group">
         <label>@lang('validation.attributes.password') </label> <span class="e_required">*</span>
-        <input class="form-control input-sm"
+        <input class="form-control form-control-sm"
           type="password"
           name="password"
           value="{{old('password')}}"
@@ -36,7 +36,7 @@
       </div>
       <div class="form-group">
         <label>@lang('validation.attributes.confirm_password') </label> <span class="e_required">*</span>
-        <input class="form-control input-sm"
+        <input class="form-control form-control-sm"
           type="password"
           name="confirm_password"
           value="{{old('confirm_password')}}"

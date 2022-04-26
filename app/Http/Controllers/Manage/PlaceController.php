@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use App\Models\Place;
 use App\Models\PlaceHourlyWage;
+use App\Models\PlaceShiftHour;
 
 class PlaceController extends Controller
 {
@@ -71,10 +72,12 @@ class PlaceController extends Controller
   {
     $obj = Place::findOrFail($request->id);
     $wages = [];
+    $shifts = [];
 
     return view($this->viewPrefix.'.update', [
       'obj' => $obj,
       'wages' => $wages,
+      'shifts' => $wages,
       'routePrefix' => $this->routePrefix,
       'viewPrefix' => $this->viewPrefix
     ]);
@@ -141,6 +144,27 @@ class PlaceController extends Controller
       ->withErrors($validator);
   }
 
+  public function updateShiftPost(Request $request)
+  {
+    $placeId = $request->place_id;
+    $obj = Place::findOrFail($placeId);
+    $data = $request->all();
+    
+    $validator = PlaceShiftHour::setPlaceShiftHours($data);
+
+    if($validator === true) {
+      return redirect()
+        ->back()
+        ->with('success', \Lang::get('common.update-wage-succed', ['module' => \Lang::get('common.'.$this->module)]));
+    }
+
+    return redirect()
+      ->back()
+      ->with('error', \Lang::get('common.update-wage-failed', ['module' => \Lang::get('common.'.$this->module)]))
+      ->withInput($data)
+      ->withErrors($validator);
+  }
+
   public function getWages(Request $request)
   {
     $placeId = $request->id;
@@ -148,6 +172,16 @@ class PlaceController extends Controller
     $data = $request->all();
 
     $wages = PlaceHourlyWage::getWages($data);
-    return $wages->toJson();
+    return json_encode($wages);
+  }
+  
+  public function getShift(Request $request)
+  {
+    $placeId = $request->id;
+    $obj = Place::findOrFail($placeId);
+    $data = $request->all();
+
+    $shift = PlaceShiftHour::getShift($data);
+    return json_encode($shift);
   }
 }

@@ -30,11 +30,6 @@
 							<i class="c_icon fas fa-phone menu-icon"></i> @lang('common.callcenter')
 						</a>
 					</li>
-					<li>
-						<a href="{{ route('staff.attendance.list') }}" class="dropdown-item ">
-							<i class="c_icon fas fa-clipboard-list menu-icon"></i> @lang('common.attendance')
-						</a>
-					</li>
 				</ul>
 			</li>
 			@endif

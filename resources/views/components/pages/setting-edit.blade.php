@@ -11,7 +11,7 @@
 
           <div class="form-group">
             <label> テーブルの表示の行数</label>
-            <select class="form-control input-sm" id="type"
+            <select class="form-control form-control-sm" id="type"
               name="rpp">
               @foreach([1 => 1,5 => 5,15 => 15,30 => 30,50 => 50] as $value => $label)
               <option value="{{ $value }}"
