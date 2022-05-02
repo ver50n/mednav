@@ -181,13 +181,20 @@
     function addShiftClone() {
       cloneShiftObj = $('.clone-shift-source').clone();
       cloneShiftObj.removeClass('clone-shift-source');
+      cloneShiftObj.find('.start-hour').removeClass('hasDatepicker');
+      cloneShiftObj.find('.end-hour').removeClass('hasDatepicker');
       $(targetShiftClass).append(cloneShiftObj);
-      
-      $('.start-hour,.end-hour', cloneShiftObj).timepicker({
+
+      cloneShiftObj.find('.start-hour, .end-hour').timepicker({
         timeFormat: "HH:mm",
         stepMinute: 30,
       });
     }
+    
+    $('.start-hour,.end-hour').timepicker({
+      timeFormat: "HH:mm",
+      stepMinute: 30,
+    });
 
     function removeShiftClone(el) {
       el.parent().parent().remove();

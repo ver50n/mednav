@@ -83,6 +83,8 @@
             {{$row->time_start}}<br />
             <b>@lang('common.time_end')</b><br />
             {{$row->time_end}}<br />
+            <b>@lang('common.working_hour')</b><br />
+            <b>{{$row->working_hour}}</b><br />
           </td>
           <td>
             <b>@lang('common.actual_time_start')</b><br />

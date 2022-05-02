@@ -102,7 +102,7 @@
           <tbody>
             <tr>
               <th><label>@lang('common.is_active')</label></th>
-              <td><label>{{App\Helpers\ApplicationConstant::YES_NO[$obj->is_active]}}</label></td>
+              <td><label>@lang('application-constant.YES_NO.'.App\Helpers\ApplicationConstant::YES_NO[$obj->is_active])</label></td>
             </tr>
           </tbody>
         </table>

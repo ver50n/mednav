@@ -34,6 +34,7 @@
       'headers' => [
         'action' => ['sortable' => false, 'title' => trans('common.action')],
         'name' => ['sortable' => true, 'title' => trans('common.name')],
+        'username' => ['sortable' => true, 'title' => trans('common.username')],
         'email' => ['sortable' => true, 'title' => trans('common.email')],
         'is_active' => ['sortable' => true, 'title' => trans('common.is_active')],
         'created_at' => ['sortable' => true, 'title' => trans('common.created_at')],
@@ -73,6 +74,7 @@
             </div>
           </td>
           <td>{{$row->name}}</td>
+          <td>{{$row->username}}</td>
           <td>{{$row->email}}</td>
           <td>
             <form action="{{route('helpers.activation')}}"

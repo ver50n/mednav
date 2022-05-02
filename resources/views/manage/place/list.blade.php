@@ -34,7 +34,6 @@
       'headers' => [
         'action' => ['sortable' => false, 'title' => trans('common.action')],
         'name' => ['sortable' => true, 'title' => trans('common.name')],
-        'address' => ['sortable' => true, 'title' => trans('common.address')],
         'is_active' => ['sortable' => true, 'title' => trans('common.is_active')],
         'created_at' => ['sortable' => true, 'title' => trans('common.created_at')],
       ]
@@ -73,7 +72,6 @@
             </div>
           </td>
           <td>{{$row->name}}</td>
-          <td>{{$row->username}}</td>
           <td>
             <form action="{{route('helpers.activation')}}"
               id="grid-action-activation-{{$row->id}}"

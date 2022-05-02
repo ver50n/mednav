@@ -21,6 +21,10 @@ class ApplicationConstant
         'morning' => 'morning',
         'noon' => 'noon',
         'night' => 'night',
+
+        'day' => 'day',
+        'evening' => 'evening',
+        'overnight' => 'overnight'
     ];
 
     const JOBTYPE = [

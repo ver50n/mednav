@@ -12,12 +12,18 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
+        if(Auth::guard('admin')->check())
+            return redirect()->route('manage.dashboard');
+
         return view('manage.login', [
         ]);
     }
 
     public function loginPost(Request $request)
     {
+        if(Auth::guard('admin')->check())
+            return redirect()->route('manage.dashboard');
+            
         $rules = [
             'username' => [
                 'required',

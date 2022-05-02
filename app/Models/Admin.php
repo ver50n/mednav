@@ -12,6 +12,7 @@ class Admin extends Authenticatable
 {
     use \App\Traits\DataProviderTrait, \App\Traits\RelationTrait;
     public $table = 'admins';
+    protected $guarded = [];
 
     public function register($data)
     {

@@ -9,7 +9,6 @@
 				</button>
 			</a>
 		</div>
-		
 		@if($obj->status == "open")
 		<div class="grid-action">
 			<a href="{{route($routePrefix.'.update', ['id' => $obj->id])}}">

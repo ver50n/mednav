@@ -215,6 +215,7 @@
       stepMinute: 15,
     });
     $('#actual_time_start, #actual_time_end, #actual_time_rest, #transport_fee').change(function() {
+      console.log(1);
       calculateWorkingHour();
     });
     $(".calculate").click(function () {

@@ -32,6 +32,13 @@
                   autocomplete="off" />
               </div>
               <div class="form-group">
+                <label>@lang('common.username')</label>
+                <input class="form-control form-control-sm"
+                  name="filters[username]"
+                  value="{{$obj->username}}"
+                  autocomplete="off" />
+              </div>
+              <div class="form-group">
                 <label>@lang('common.email')</label>
                 <input class="form-control form-control-sm"
                   name="filters[email]"

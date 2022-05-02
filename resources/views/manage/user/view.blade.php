@@ -77,10 +77,6 @@
               <th><label>@lang('common.email')</label></th>
               <td><label>{{$obj->email}}</label></td>
             </tr>
-            <tr>
-              <th><label>@lang('common.phone')</label></th>
-              <td><label>{{$obj->phone}}</label></td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -102,7 +98,7 @@
           <tbody>
             <tr>
               <th><label>@lang('common.is_active')</label></th>
-              <td><label>{{App\Helpers\ApplicationConstant::YES_NO[$obj->is_active]}}</label></td>
+              <td><label>@lang('application-constant.YES_NO.'.App\Helpers\ApplicationConstant::YES_NO[$obj->is_active])</label></td>
             </tr>
           </tbody>
         </table>

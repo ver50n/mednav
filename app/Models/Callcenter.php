@@ -73,7 +73,7 @@ class Callcenter extends Model
                 'actual_working_hour_payment' => 'required|numeric',
                 'actual_overtime_hour_payment' => 'required|numeric',
                 'user_payment' => 'required|numeric',
-                'actual_payment' => 'required|numeric',
+                'invoice_payment' => 'required|numeric',
             ];
 
             $validator = Validator::make($data, $rules);
@@ -161,6 +161,9 @@ class Callcenter extends Model
                 $dp = $dp->where($this->table.'.date_period', '<=', $filters['date_period_end']);
             }
         }
+
+        if(isset($options["notDraft"]))
+            $dp = $dp->where($this->table.'.status', '<>', 'draft');
 
         $dp = $this->filterIsActive($dp, $filters);
         $dp = $this->filterCreatedAt($dp, $filters);

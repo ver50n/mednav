@@ -12,12 +12,18 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
+        if(Auth::guard('web')->check())
+            return redirect()->route('staff.dashboard');
+
         return view('staff.login', [
         ]);
     }
 
     public function loginPost(Request $request)
     {
+        if(Auth::guard('web')->check())
+            return redirect()->route('staff.dashboard');
+            
         $rules = [
             'username' => [
                 'required',

@@ -15,14 +15,16 @@
       <label>@lang('common.address')</label>
       <textarea class="form-control form-control-sm"
         name="address"
-        placeholder="@lang('common.address')"> {{old('desc')}} </textarea>
+        rows="5"
+        placeholder="@lang('common.address')">{{old('address')}}</textarea>
       <span class="c_form__error-block">{{$errors->first('address')}}</span>
     </div>
     <div class="form-group">
       <label>@lang('common.desc')</label>
       <textarea class="form-control form-control-sm"
         name="desc"
-        placeholder="@lang('common.desc')"> {{old('desc')}} </textarea>
+        rows="5"
+        placeholder="@lang('common.desc')">{{old('desc')}}</textarea>
       <span class="c_form__error-block">{{$errors->first('desc')}}</span>
     </div>
     <div>

@@ -18,6 +18,10 @@
             'morning' => '朝',
             'noon' => '昼',
             'night' => '夜',
+
+            'day' => '日勤',
+            'evening' => '準夜', 
+            'overnight' => '深夜',
         ],
         'JOBTYPE' => [
             'callcenter' => 'コールセンター',

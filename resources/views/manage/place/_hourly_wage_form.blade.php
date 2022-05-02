@@ -64,22 +64,22 @@
           </td>
           <td>
             <div class="form-group">
-              <input class="form-control form-control-sm overtime-wage price-field"
-                name="overtime_wage[]"
-                rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime'] }}"
-                value="{{old('overtime_wage') ? old('overtime_wage') : $wage->overtime_wage}}"
-                placeholder="@lang('common.overtime_wage')" />
-              <span class="c_form__error-block">{{$errors->first('overtime_wage')}}</span>
-            </div>
-          </td>
-          <td>
-            <div class="form-group">
               <input class="form-control form-control-sm night-overtime-wage price-field"
                 name="night_overtime_wage[]"
                 rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['night_overtime'] }}"
                 value="{{old('night_overtime_wage') ? old('night_overtime_wage') : $wage->night_overtime_wage}}"
                 placeholder="@lang('common.night_overtime_wage')" />
               <span class="c_form__error-block">{{$errors->first('night_overtime_wage')}}</span>
+            </div>
+          </td>
+          <td>
+            <div class="form-group">
+              <input class="form-control form-control-sm overtime-wage price-field"
+                name="overtime_wage[]"
+                rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime'] }}"
+                value="{{old('overtime_wage') ? old('overtime_wage') : $wage->overtime_wage}}"
+                placeholder="@lang('common.overtime_wage')" />
+              <span class="c_form__error-block">{{$errors->first('overtime_wage')}}</span>
             </div>
           </td>
           <td>

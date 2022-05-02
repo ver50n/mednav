@@ -58,7 +58,7 @@
         aria-expanded="true"
         aria-controls="collapse-view__base-info"
         id="view" class="d-block">
-        <i class="c_icon fa fa-chevron-down pull-right menu-icon"> lang('common.basic-info')</i>
+        <i class="c_icon fa fa-chevron-down pull-right menu-icon"> @lang('common.basic-info')</i>
       </a>
     </div>
     <div id="collapse-view__base-info" class="collapse show">
@@ -74,13 +74,87 @@
               <td><label>{{$obj->name}}</label></td>
             </tr>
             <tr>
-              <th><label>@lang('common.username')</label></th>
-              <td><label>{{$obj->username}}</label></td>
+              <th><label>@lang('common.address')</label></th>
+              <td><label>{!! nl2br($obj->address) !!}</label></td>
             </tr>
             <tr>
-              <th><label>@lang('common.email')</label></th>
-              <td><label>{{$obj->email}}</label></td>
+              <th><label>@lang('common.desc')</label></th>
+              <td><label>{!! nl2br($obj->desc) !!}</label></td>
             </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  
+  <section class="card components__card-section-wrapper">
+    <div class="card-header">
+      <a data-toggle="collapse" href="#collapse-view__hourly-wages-info"
+        aria-expanded="true"
+        aria-controls="collapse-view__hourly-wages-info"
+        id="view" class="d-block">
+        <i class="c_icon fa fa-chevron-down pull-right menu-icon"> @lang('common.hourly-wage-info')</i>
+      </a>
+    </div>
+    <div id="collapse-view__hourly-wages-info" class="collapse show">
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-hover table-condensed">
+          <thead>
+            <tr>
+              <th><label>@lang('common.jobtype')</label></th>
+              <th><label>@lang('common.morning_wage')</label></th>
+              <th><label>@lang('common.noon_wage')</label></th>
+              <th><label>@lang('common.night_wage')</label></th>
+              <th><label>@lang('common.night_overtime_wage')</label></th>
+              <th><label>@lang('common.overtime_wage')</label></th>
+              <th><label>@lang('common.holiday_wage')</label></th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($obj->placeHourlyWages as $wage)
+            <tr>
+              <td><label>@lang('application-constant.JOBTYPE.'.$wage->jobtype)</label></td>
+              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->morning_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['morning'] }}x</small></label></td>
+              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->noon_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['noon'] }}x</small></label></td>
+              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->night_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['night'] }}x</small></label></td>
+              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->night_overtime_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['night_overtime'] }}x</small></label></td>
+              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->overtime_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime'] }}x</small></label></td>
+              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->holiday_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['holiday'] }}x</small></label></td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="card components__card-section-wrapper">
+    <div class="card-header">
+      <a data-toggle="collapse" href="#collapse-view__shift-hours-info"
+        aria-expanded="true"
+        aria-controls="collapse-view__shift-hours-info"
+        id="view" class="d-block">
+        <i class="c_icon fa fa-chevron-down pull-right menu-icon"> @lang('common.shift-hour-info')</i>
+      </a>
+    </div>
+    <div id="collapse-view__shift-hours-info" class="collapse show">
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-hover table-condensed">
+          <thead>
+            <tr>
+              <th><label>@lang('common.shift')</label></th>
+              <th><label>@lang('common.start_hour')</label></th>
+              <th><label>@lang('common.end_hour')</label></th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($obj->placeShiftHours as $shift)
+            <tr>
+              <td><label>@lang('application-constant.WORKING_SHIFT.'.$shift->shift)</label></td>
+              <td><label>{{ $shift->start_hour->format('H:i') }}</label></td>
+              <td><label>{{ $shift->end_hour->format('H:i') }}</label></td>
+            </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -102,7 +176,7 @@
           <tbody>
             <tr>
               <th><label>@lang('common.is_active')</label></th>
-              <td><label>{{App\Helpers\ApplicationConstant::YES_NO[$obj->is_active]}}</label></td>
+              <td><label>@lang('application-constant.YES_NO.'.App\Helpers\ApplicationConstant::YES_NO[$obj->is_active])</label></td>
             </tr>
           </tbody>
         </table>

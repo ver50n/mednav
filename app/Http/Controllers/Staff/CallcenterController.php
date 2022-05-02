@@ -29,7 +29,8 @@ class CallcenterController extends Controller
     $data = $obj->filter($filters, [
       'pagination' => true,
       'page' => $page,
-      'sort' => $sort
+      'sort' => $sort,
+      'notDraft' => true
     ]);
 
     return view($this->viewPrefix.'.list', [

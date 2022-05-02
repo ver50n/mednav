@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light navbar-expand-md"  style="background-color: #ffc9f6;">
 	<div class="navbar-brand-wrapper">
 		<a class="navbar-brand" href="{{ route('staff.dashboard') }}">
-			| @lang('common.brand') | 
+			<img src="/images/logo.gif" style="height: 45px;" />
 		</a>
 	</div>
 	<button class="navbar-toggler"
@@ -37,13 +37,8 @@
 		<ul class="navbar-nav ml-auto">
 			@if(Auth::guard('web')->check())
 			<li class="nav-item">
-				<a class="nav-link" href="{{ route('staff.setting') }}">
-					<i class="c_icon fas fa-cogs menu-icon"></i> 設定
-				</a>
-			</li>
-			<li class="nav-item">
 				<a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-					<i class="c_icon fas fa-power-off menu-icon"></i> Logout
+					<i class="c_icon fas fa-power-off menu-icon"></i> @lang('common.logout')
 					<form id="logout-form"
 						action="{{ route('staff.logout')  }}"
 						method="POST"
@@ -55,7 +50,7 @@
 			@else
 			<li class="nav-item">
 				<a class="nav-link" href="{{ route('staff.login') }}">
-				  <i class="c_icon fas fa-sign-in-alt menu-icon"></i> ログイン
+				  <i class="c_icon fas fa-sign-in-alt menu-icon"></i> @lang('common.login')
 				</a>
 			</li>
 			@endif

@@ -12,6 +12,24 @@
       <span class="c_form__error-block">{{$errors->first('name')}}</span>
     </div>
     
+    <div class="form-group">
+      <label>@lang('common.address')</label>
+      <textarea class="form-control form-control-sm"
+        rows="5"
+        name="address"
+        placeholder="@lang('common.address')">{{ old('address') ? old('address') : $obj->address }}</textarea>
+      <span class="c_form__error-block">{{$errors->first('address')}}</span>
+    </div>
+    
+    <div class="form-group">
+      <label>@lang('common.desc')</label>
+      <textarea class="form-control form-control-sm"
+        rows="5"
+        name="desc"
+        placeholder="@lang('common.desc')">{{ old('desc') ? old('desc') : $obj->desc }}</textarea>
+      <span class="c_form__error-block">{{$errors->first('desc')}}</span>
+    </div>
+    
     <div>
       <button type="submit" class="btn btn-outline-primary">
         <span class="action-icon">

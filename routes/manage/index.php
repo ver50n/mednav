@@ -18,17 +18,17 @@
 // Setting
 Route::get('/setting', 'PageController@setting')
   ->name('manage.setting')
-  ->middleware([]);
+  ->middleware(['AdminAuthentication']);
 
 Route::post('/change-password-post', 'PageController@changePasswordPost')
   ->name('manage.change-password-post')
-  ->middleware([]);
+  ->middleware(['AdminAuthentication']);
 Route::post('/account-post', 'PageController@accountPost')
   ->name('manage.account-post')
-  ->middleware([]);
+  ->middleware(['AdminAuthentication']);
 Route::post('/setting-post', 'PageController@settingPost')
   ->name('manage.setting-post')
-  ->middleware([]);
+  ->middleware(['AdminAuthentication']);
     
   Route::prefix('/admin')->middleware(['AdminAuthentication'])->group(base_path('routes/manage/admin.php'));
   Route::prefix('/user')->middleware(['AdminAuthentication'])->group(base_path('routes/manage/user.php'));

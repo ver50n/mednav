@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'brand' => 'MedNav',
+    'brand' => 'Medi Navi',
 
     'dashboard' => 'ダッシュボード',
     'master' => 'マスター',
@@ -25,7 +25,8 @@ return [
     'disactivate' => '無効にする',
     'request' => '申請',
     'calculate' => '計算',
-    
+    'login' => 'ログイン',
+    'logout' => 'ログアウト',
 
     'basic-info' => '基本情報',
     'working-info' => '業務予定情報',

@@ -6,15 +6,12 @@ use Closure;
 use Auth;
 use App;
 
-class AdminAuthentication
+class UserAuthentication
 {
     public function handle($request, Closure $next)
     {
         if(!Auth::guard('web')->check()) {
-            return redirect()->route('manage.login');
-        } else {
-            if($request->route()->getName() == 'manage.login')
-                return redirect()->route('manage.dashboard');
+            return redirect()->route('staff.login');
         }
         return $next($request);
     }
