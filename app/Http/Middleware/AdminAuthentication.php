@@ -12,9 +12,6 @@ class AdminAuthentication
     {
         if(!Auth::guard('web')->check()) {
             return redirect()->route('manage.login');
-        } else {
-            if($request->route()->getName() == 'manage.login')
-                return redirect()->route('manage.dashboard');
         }
         return $next($request);
     }
