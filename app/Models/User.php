@@ -67,7 +67,6 @@ class User extends Authenticatable
 
         try {
             $rules = [
-                'username' => 'required|unique:users,username,'.$this->id,
                 'email' => 'required|email|unique:users,email,'.$this->id,
             ];
 
