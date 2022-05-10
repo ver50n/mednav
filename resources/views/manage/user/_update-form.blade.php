@@ -11,6 +11,7 @@
         placeholder="@lang('common.name')" />
       <span class="c_form__error-block">{{$errors->first('name')}}</span>
     </div>
+    
     <div class="form-group">
       <label>@lang('common.email')</label> <span class="e_required">*</span>
       <input class="form-control form-control-sm"
@@ -20,15 +21,6 @@
       <span class="c_form__error-block">{{$errors->first('email')}}</span>
     </div>
 
-    <div class="form-group">
-      <label>@lang('common.phone')</label> <span class="e_required">*</span>
-      <input class="form-control form-control-sm"
-        name="phone"
-        value="{{old('phone') ? old('phone') : $obj->phone}}"
-        placeholder="@lang('common.phone')" />
-      <span class="c_form__error-block">{{$errors->first('phone')}}</span>
-    </div>
-    
     <div class="form-group">
       <label>@lang('common.password')</label>
       <input class="form-control form-control-sm"

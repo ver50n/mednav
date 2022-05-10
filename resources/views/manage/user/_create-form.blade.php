@@ -11,6 +11,16 @@
         placeholder="@lang('common.name')" />
       <span class="c_form__error-block">{{$errors->first('name')}}</span>
     </div>
+    
+    <div class="form-group">
+      <label>@lang('common.username')</label> <span class="e_required">*</span>
+      <input class="form-control form-control-sm"
+        name="username"
+        value="{{old('username')}}"
+        placeholder="@lang('common.username')" />
+      <span class="c_form__error-block">{{$errors->first('username')}}</span>
+    </div>
+
     <div class="form-group">
       <label>@lang('common.email')</label> <span class="e_required">*</span>
       <input class="form-control form-control-sm"
@@ -18,15 +28,6 @@
         value="{{old('email')}}"
         placeholder="@lang('common.email')" />
       <span class="c_form__error-block">{{$errors->first('email')}}</span>
-    </div>
-
-    <div class="form-group">
-      <label>@lang('common.phone')</label> <span class="e_required">*</span>
-      <input class="form-control form-control-sm"
-        name="phone"
-        value="{{old('phone')}}"
-        placeholder="@lang('common.phone')" />
-      <span class="c_form__error-block">{{$errors->first('phone')}}</span>
     </div>
 
     <div class="form-group">

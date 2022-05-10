@@ -33,15 +33,16 @@ class User extends Authenticatable
             $rules = [
                 'username' => 'required|unique:users',
                 'email' => 'required|unique:users|email',
-                'phone' => 'required|min:10|max:12',
                 'password' => 'required|min:6',
                 'confirm_password' => 'required|same:password',
             ];
                 
             $validator = Validator::make($data, $rules);
 
-            if($validator->fails())
+            if($validator->fails()) {
+                dd($validator);
                 return $validator;
+            }
 
             $this->fill($data);
             
@@ -68,7 +69,6 @@ class User extends Authenticatable
             $rules = [
                 'username' => 'required|unique:users,username,'.$this->id,
                 'email' => 'required|email|unique:users,email,'.$this->id,
-                'phone' => 'min:10|max:12',
             ];
 
             if($this->isDirty('password')) {
