@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Admin;
-use App\Models\CallCenter;
+use App\Models\Callcenter;
 use App\Models\User;
 
 use \App\Utils\DateTimeInherit;
@@ -66,7 +66,7 @@ class ManageController extends Controller
                     continue;
                 }
 
-                $cc = new CallCenter();
+                $cc = new Callcenter();
                 $ccdata['date_period'] = $period;
                 $ccdata['user_id'] = $user->id;
                 $ccdata['place_id'] = 5;
