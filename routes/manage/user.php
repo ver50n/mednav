@@ -37,3 +37,6 @@
   Route::post('/{id}/delete', $controller.'@delete')
     ->name($module.'.delete')
     ->middleware([]);
+  Route::post('/reset-password', $controller.'@resetPasswordPost')
+    ->name($module.'.resetPasswordPost')
+    ->middleware([]);

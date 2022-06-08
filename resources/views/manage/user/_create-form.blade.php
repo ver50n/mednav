@@ -29,6 +29,28 @@
         placeholder="@lang('common.email')" />
       <span class="c_form__error-block">{{$errors->first('email')}}</span>
     </div>
+    
+    <div class="form-group">
+      <label>@lang('common.is_outsource')</label> <span class="e_required">*</span>
+      <select name="is_outsource"
+        id="is_outsource"
+        class="form-control form-control-sm">
+      @foreach(App\Helpers\ApplicationConstant::YES_NO as $key => $value)
+        <option value="{{$key}}" {{ $value == old('is_outsource') ? 'selected' : '' }}>
+          @lang('application-constant.YES_NO.'.$value)
+        </option>
+      @endforeach
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>@lang('common.outsource_name')</label>
+      <input class="form-control form-control-sm"
+        name="outsource_name"
+        value="{{old('outsource_name')}}"
+        placeholder="@lang('common.outsource_name')" />
+      <span class="c_form__error-block">{{$errors->first('outsource_name')}}</span>
+    </div>
 
     <div class="form-group">
       <label>@lang('common.password')</label> <span class="e_required">*</span>
@@ -38,6 +60,7 @@
         placeholder="@lang('common.password')" />
       <span class="c_form__error-block">{{$errors->first('password')}}</span>
     </div>
+
     <div class="form-group">
       <label>@lang('common.confirm_password')</label> <span class="e_required">*</span>
       <input class="form-control form-control-sm"

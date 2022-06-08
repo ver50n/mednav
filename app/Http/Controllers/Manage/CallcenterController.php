@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use App\Models\Callcenter;
+use Lang;
 
 class CallcenterController extends Controller
 {
@@ -115,5 +116,17 @@ class CallcenterController extends Controller
 
     return redirect()->route($this->routePrefix.'.list')
       ->with('success', \Lang::get('common.delete-succed', ['module' => \Lang::get('common.'.$this->module)]));
+  }
+
+  public function simulation(Request $request)
+  {
+    $data = $request->all();
+    $cc = CallCenter::find($data['id']);
+    $cc->fill($data);
+    $result = $cc->calculateSimulation();
+
+    $result['period'] = date_format(date_create($result['period']), 'Y年m月d日 (').Lang::get('application-constant.DAY_OF_WEEK.'.date_format(date_create($result['period']), 'N')).')';
+
+    return json_encode($result, JSON_UNESCAPED_UNICODE);
   }
 }

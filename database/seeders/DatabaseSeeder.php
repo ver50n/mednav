@@ -13,6 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $seedList = [
+            'admin',
+            'user',
+            //'place'
+        ];
+        if(in_array('admin', $seedList))
+            $this->call(admin_table_seeder::class);
+        if(in_array('user', $seedList))
+            $this->call(user_table_seeder::class);
+        if(in_array('place', $seedList))
+            $this->call(place_table_seeder::class);
     }
 }

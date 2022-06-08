@@ -37,7 +37,7 @@
         'username' => ['sortable' => true, 'title' => trans('common.username')],
         'email' => ['sortable' => true, 'title' => trans('common.email')],
         'is_active' => ['sortable' => true, 'title' => trans('common.is_active')],
-        'created_at' => ['sortable' => true, 'title' => trans('common.created_at')],
+        'reset_password' => ['sortable' => false, 'title' => trans('common.reset').trans('common.password')],
       ]
     ])
       <tbody>
@@ -97,7 +97,19 @@
             </button>
             @endif
           </td>
-          <td>{{$row->created_at}}</td>
+          <td>
+            <form action="{{route('manage.user.resetPasswordPost')}}"
+              id="grid-action-reset-password-{{$row->id}}"
+              method="POST"
+            >
+              @csrf
+              <input type="hidden" name="id" value="{{$row->id}}"/>
+            </form>
+            <button class="btn btn-secondary"
+              onClick="document.getElementById('grid-action-reset-password-{{$row->id}}').submit()">
+              <i class="c_icon fas fa-recycle menu-icon"></i> @lang('common.reset') @lang('common.password')
+            </button>
+          </td>
         </tr>
       @endforeach
       </tbody>

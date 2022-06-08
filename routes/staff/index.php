@@ -16,17 +16,17 @@
     ->middleware([]);
     
 // Setting
-Route::get('/setting', 'PageController@setting')
+Route::get('/setting', 'Staff\StaffController@setting')
   ->name($module.'.setting')
   ->middleware(['UserAuthentication']);
 
-Route::post('/change-password-post', 'PageController@changePasswordPost')
+Route::post('/change-password-post', 'Staff\StaffController@changePasswordPost')
   ->name($module.'.change-password-post')
   ->middleware(['UserAuthentication']);
-Route::post('/account-post', 'PageController@accountPost')
+Route::post('/account-post', 'Staff\StaffController@accountPost')
   ->name($module.'.account-post')
   ->middleware(['UserAuthentication']);
-Route::post('/setting-post', 'PageController@settingPost')
+Route::post('/setting-post', 'Staff\StaffController@settingPost')
   ->name($module.'.setting-post')
   ->middleware(['UserAuthentication']);
 

@@ -116,4 +116,13 @@ class UserController extends Controller
     return redirect()->route($this->routePrefix.'.list')
       ->with('success', \Lang::get('common.delete-succed', ['module' => \Lang::get('common.'.$this->module)]));
   }
+
+  public function resetPasswordPost(Request $request)
+  {
+    $obj = User::findOrFail($request->id);
+    $obj->resetPassword();
+
+    return redirect()->route($this->routePrefix.'.list')
+      ->with('success', \Lang::get('common.reset-password-succed', ['module' => \Lang::get('common.'.$this->module)]));
+  }
 }

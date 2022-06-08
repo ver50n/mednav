@@ -40,7 +40,6 @@ class User extends Authenticatable
             $validator = Validator::make($data, $rules);
 
             if($validator->fails()) {
-                dd($validator);
                 return $validator;
             }
 
@@ -94,6 +93,40 @@ class User extends Authenticatable
         }
     }
 
+    public function resetPassword()
+    {
+        $this->password = bcrypt('staff123');
+        $this->save();
+    }
+
+
+    public function changePassword($data)
+    {
+        $validator = null;
+        DB::beginTransaction();
+
+        try {
+            $rules = [
+                'password' => 'required|required_with:confirm_password|same:confirm_password',
+                'confirm_password' => 'required'
+            ];
+
+            $validator = Validator::make($data, $rules);
+            if($validator->fails())
+                return $validator;
+
+            $this->password = bcrypt($data['password']);
+            $this->save();
+
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollback();
+            \Log::error($e->getMessage());
+            return $validator->getMessageBag()->add('password', $e->getMessage());
+        }
+    }
+
     public function filter($filters, $options = [])
     {
         $dp = $this;
@@ -103,8 +136,14 @@ class User extends Authenticatable
             $dp = $dp->where('name', 'LIKE', '%'.$filters['name'].'%');
         if(isset($filters['email']) && $filters['name'] != "")
             $dp = $dp->where('email', 'LIKE', '%'.$filters['email'].'%');
+        if(isset($filters['username']) && $filters['username'] != "")
+            $dp = $dp->where('username', 'LIKE', '%'.$filters['username'].'%');
         if(isset($filters['phone']) && $filters['phone'] != "")
             $dp = $dp->where('phone', 'LIKE', '%'.$filters['phone'].'%');
+        if(isset($filters['is_outsource']) && $filters['is_outsource'] != "")
+            $dp = $dp->where('is_outsource', '=', $filters['is_outsource']);
+        if(isset($filters['outsource_name']) && $filters['outsource_name'] != "")
+            $dp = $dp->where('outsource_name', 'LIKE', '%'.$filters['outsource_name'].'%');
 
         $dp = $this->filterIsActive($dp, $filters);
         $dp = $this->filterCreatedAt($dp, $filters);

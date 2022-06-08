@@ -5,29 +5,29 @@
     ->middleware(['AdminAuthentication']);
 
   Route::get('/login', 'Manage\LoginController@login')
-    ->name('manage.login')
+    ->name($module.'.login')
     ->middleware([]);
   Route::post('/login', 'Manage\LoginController@loginPost')
-    ->name('manage.login-post')
+    ->name($module.'.login-post')
     ->middleware([]);
 
   Route::post('/logout', 'Manage\LoginController@logout')
-    ->name('manage.logout')
+    ->name($module.'.logout')
     ->middleware([]);
     
 // Setting
-Route::get('/setting', 'PageController@setting')
-  ->name('manage.setting')
+Route::get('/setting', 'Manage\ManageController@setting')
+  ->name($module.'.setting')
   ->middleware(['AdminAuthentication']);
 
-Route::post('/change-password-post', 'PageController@changePasswordPost')
-  ->name('manage.change-password-post')
+Route::post('/change-password-post', 'Manage\ManageController@changePasswordPost')
+  ->name($module.'.change-password-post')
   ->middleware(['AdminAuthentication']);
-Route::post('/account-post', 'PageController@accountPost')
-  ->name('manage.account-post')
+Route::post('/account-post', 'Manage\ManageController@accountPost')
+  ->name($module.'.account-post')
   ->middleware(['AdminAuthentication']);
-Route::post('/setting-post', 'PageController@settingPost')
-  ->name('manage.setting-post')
+Route::post('/setting-post', 'Manage\ManageController@settingPost')
+  ->name($module.'.setting-post')
   ->middleware(['AdminAuthentication']);
     
   Route::prefix('/admin')->middleware(['AdminAuthentication'])->group(base_path('routes/manage/admin.php'));

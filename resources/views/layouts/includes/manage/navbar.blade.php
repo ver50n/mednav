@@ -59,6 +59,11 @@
 		<ul class="navbar-nav ml-auto">
 			@if(Auth::guard('admin')->check())
 			<li class="nav-item">
+				<a class="nav-link" href="{{ route('manage.setting') }}">
+					<i class="c_icon fas fa-cogs menu-icon"></i> 設定
+				</a>
+			</li>
+			<li class="nav-item">
 				<a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 					<i class="c_icon fas fa-power-off menu-icon"></i> @lang('common.logout')
 					<form id="logout-form"

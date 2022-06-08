@@ -38,6 +38,7 @@
         'place' => ['sortable' => true, 'title' => trans('common.place')],
         'working_hour' => ['sortable' => false, 'title' => trans('common.working-info')],
         'actual_working_hour' => ['sortable' => false, 'title' => trans('common.actual-working-info')],
+        'actual_payment_1' => ['sortable' => false, 'title' => trans('common.actual-payment-info')],
         'actual_payment' => ['sortable' => false, 'title' => trans('common.actual-summary-info')],
         'status' => ['sortable' => true, 'title' => trans('common.status')],
       ]
@@ -83,21 +84,45 @@
             {{$row->time_start}}<br />
             <b>@lang('common.time_end')</b><br />
             {{$row->time_end}}<br />
-            <b>@lang('common.working_hour')</b><br />
-            <b>{{$row->working_hour}}</b><br />
           </td>
           <td>
+            <b>@lang('common.actual_working_hour_day_shift')</b><br />
+            <b>(@lang('common.normal')) {{$row->actual_working_hour_day_shift}}</b><br />
+            <b>(@lang('common.overtime')) {{$row->actual_overtime_hour_day_shift}}</b><br />
+
+            <b>@lang('common.actual_working_hour_evening_shift')</b><br />
+            <b>(@lang('common.normal')) {{$row->actual_working_hour_evening_shift}}</b><br />
+            <b>(@lang('common.overtime')) {{$row->actual_overtime_hour_evening_shift}}</b><br />
+
+            <b>@lang('common.actual_working_hour_overnight_shift')</b><br />
+            <b>(@lang('common.normal')) {{$row->actual_working_hour_overnight_shift}}</b><br />
+            <b>(@lang('common.overtime')) {{$row->actual_overtime_hour_overnight_shift}}</b><br />
+
+            <br />
             <b>@lang('common.actual_time_start')</b><br />
             {{$row->actual_time_start}}<br />
             <b>@lang('common.actual_time_rest')</b><br />
-            {{$row->actual_time_rest}}<br />
+            (1) {{$row->actual_time_rest_start}} ~ <br />
+            {{$row->actual_time_rest_end}}<br />
+            (2) {{$row->actual_time_rest_start2}} ~ <br />
+            {{$row->actual_time_rest_end2}}<br />
             <b>@lang('common.actual_time_end')</b><br />
             {{$row->actual_time_end}}<br />
-            <b>@lang('common.actual_working_hour')</b><br />
-            <b>{{$row->actual_working_hour}}</b><br />
-            <b>@lang('common.actual_overtime')</b><br />
-            <b>{{$row->actual_overtime}}</b><br />
           </td>
+          <td>
+            <b>@lang('common.actual_payment_day')</b><br />
+            <b>(@lang('common.normal')) {{$row->actual_payment_normal_day}}</b><br />
+            <b>(@lang('common.overtime')) {{$row->actual_payment_overtime_day}}</b><br />
+
+            <b>@lang('common.actual_payment_evening')</b><br />
+            <b>(@lang('common.normal')) {{$row->actual_payment_normal_evening}}</b><br />
+            <b>(@lang('common.overtime')) {{$row->actual_payment_overtime_evening}}</b><br />
+
+            <b>@lang('common.actual_payment_overnight')</b><br />
+            <b>(@lang('common.normal')) {{$row->actual_payment_normal_overnight}}</b><br />
+            <b>(@lang('common.overtime')) {{$row->actual_payment_overtime_overnight}}</b><br />
+          </td>
+
           <td>
             <b>@lang('common.actual_working_hour_payment')</b><br />
             {{ App\Utils\NumberUtil::currencyFormat($row->actual_working_hour_payment, $currency = 'JPY', $options = []) }}<br />

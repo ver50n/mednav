@@ -12,10 +12,6 @@ class PlaceShiftHour extends Model
 {
     use \App\Traits\DataProviderTrait, \App\Traits\RelationTrait;
     public $table = 'place_shift_hours';
-    protected $casts = [
-        'start_hour' => 'datetime:H:i',
-        'end_hour' => 'datetime:H:i',
-    ];
     protected $guarded = [];
 
     public function place()
@@ -40,13 +36,15 @@ class PlaceShiftHour extends Model
                     'required',
                     Rule::in(array_keys(\App\Helpers\ApplicationConstant::WORKING_SHIFT)),
                 ],
-                'start_hour' => 'required|date_format:H:i',
-                'end_hour' => 'required|date_format:H:i',
+                'start_hour' => 'required',
+                'end_hour' => 'required',
             ];
 
             $validator = Validator::make($data, $rules);
-            if($validator->fails())
+            if($validator->fails()) {
+                dd($validator->messages()->get('*'));
                 return $validator;
+            }
             $this->fill($data);
             $this->save();
 
@@ -69,6 +67,7 @@ class PlaceShiftHour extends Model
                 "shift" => $data["shift"][$i],
                 "start_hour" => $data["start_hour"][$i],
                 "end_hour" => $data["end_hour"][$i],
+                "overlap_hour" => $data["overlap_hour"][$i],
             ];
             $placeShiftHour = new PlaceShiftHour();
             $placeShiftHour->add($shiftData);

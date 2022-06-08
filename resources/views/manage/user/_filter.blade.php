@@ -45,6 +45,26 @@
                   value="{{$obj->email}}"
                   autocomplete="off" />
               </div>
+              <div class="form-group">
+                <label>@lang('common.is_outsource')</label>
+                <select name="is_outsource"
+                  id="is_outsource"
+                  class="form-control form-control-sm">
+                  <option value=""> - </option>
+                @foreach(App\Helpers\ApplicationConstant::YES_NO as $key => $value)
+                  <option value="{{$key}}" {{ $value == old('is_outsource') ? 'selected' : '' }}>
+                    @lang('application-constant.YES_NO.'.$value)
+                  </option>
+                @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label>@lang('common.outsource_name')</label>
+                <input class="form-control form-control-sm"
+                  name="outsource_name"
+                  value="{{old('outsource_name')}}" />
+                <span class="c_form__error-block">{{$errors->first('outsource_name')}}</span>
+              </div>
               <div>
                 <button type="submit" class="btn btn-success">
                   <span class="action-icon">

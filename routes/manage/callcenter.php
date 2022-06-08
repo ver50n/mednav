@@ -28,3 +28,6 @@
   Route::post('/{id}/delete', $controller.'@delete')
     ->name($module.'.delete')
     ->middleware([]);
+  Route::get('/simulation', $controller.'@simulation')
+    ->name($module.'.simulation')
+    ->middleware([]);

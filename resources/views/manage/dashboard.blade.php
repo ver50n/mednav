@@ -6,7 +6,7 @@
   <section class="container">
     <div class="subcontainer dashboard">
       <div class="jumbotron">
-        <h1>MedNavの管理画面へようこそ！</h1>
+        <h1>MediNaviの管理画面へようこそ！</h1>
         <p>ここから内容を管理できます。</p>
       </div>
     </div>

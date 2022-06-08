@@ -19,6 +19,7 @@ class CreatePlaceShiftHoursTable extends Migration
             $table->string("shift");
             $table->time("start_hour");
             $table->time("end_hour");
+            $table->time("overlap_hour");
             $table->timestamps();
         });
     }

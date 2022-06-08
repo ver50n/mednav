@@ -9,6 +9,7 @@
         <th>@lang('common.shift')</th>
         <th>@lang('common.start_hour')</th>
         <th>@lang('common.end_hour')</th>
+        <th>@lang('common.overlap_hour')</th>
         <th>@lang('common.action')</th>
       </thead>
       <tbody class="shift-info">
@@ -35,7 +36,7 @@
                 class="start-hour"
                 name="start_hour[]"
                 readOnly
-                value="{{old('start_hour') ? old('start_hour') : $shift->start_hour->format('H:i')}}"
+                value="{{old('start_hour') ? old('start_hour') : $shift->start_hour}}"
                 placeholder="@lang('common.start_hour')" />
               <span class="c_form__error-block">{{$errors->first('start_hour')}}</span>
             </div>
@@ -46,9 +47,20 @@
                 class="end-hour"
                 name="end_hour[]"
                 readOnly
-                value="{{old('end_hour') ? old('end_hour') : $shift->end_hour->format('H:i')}}"
+                value="{{old('end_hour') ? old('end_hour') : $shift->end_hour}}"
                 placeholder="@lang('common.end_hour')" />
               <span class="c_form__error-block">{{$errors->first('end_hour')}}</span>
+            </div>
+          </td>
+          <td>
+            <div class="form-group">
+              <input class="form-control form-control-sm overlap-hour"
+                class="overlap-hour"
+                name="overlap_hour[]"
+                readOnly
+                value="{{old('overlap_hour') ? old('overlap_hour') : $shift->overlap_hour}}"
+                placeholder="@lang('common.overlap_hour')" />
+              <span class="c_form__error-block">{{$errors->first('overlap_hour')}}</span>
             </div>
           </td>
           <td>
@@ -105,6 +117,15 @@
           readOnly
           value="00:00"
           placeholder="@lang('common.end_hour')" />
+      </div>
+    </td>
+    <td>
+      <div class="form-group">
+        <input class="form-control form-control-sm overlap-hour"
+          name="overlap_hour[]"
+          readOnly
+          value="00:00"
+          placeholder="@lang('common.overlap_hour')" />
       </div>
     </td>
     <td>

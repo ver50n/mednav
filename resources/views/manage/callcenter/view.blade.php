@@ -61,20 +61,20 @@
                 <table class="table table-bordered table-striped table-hover table-condensed">
                   <thead>
                     <tr>
-                      <th><label>@lang('common.morning_wage')</label></th>
-                      <th><label>@lang('common.noon_wage')</label></th>
-                      <th><label>@lang('common.night_wage')</label></th>
-                      <th><label>@lang('common.night_overtime_wage')</label></th>
+                      <th><label>@lang('common.day_wage')</label></th>
+                      <th><label>@lang('common.evening_wage')</label></th>
+                      <th><label>@lang('common.overnight_wage')</label></th>
+                      <th><label>@lang('common.overtime_overnight_wage')</label></th>
                       <th><label>@lang('common.overtime_wage')</label></th>
                       <th><label>@lang('common.holiday_wage')</label></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->morning_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['morning'] }}x</small></label></td>
-                      <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->noon_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['noon'] }}x</small></label></td>
-                      <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->night_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['night'] }}x</small></label></td>
-                      <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->night_overtime_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['night_overtime'] }}x</small></label></td>
+                      <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->day_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['day'] }}x</small></label></td>
+                      <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->evening_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['evening'] }}x</small></label></td>
+                      <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->overnight_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overnight'] }}x</small></label></td>
+                      <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->overtime_overnight_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime_overnight'] }}x</small></label></td>
                       <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->overtime_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime'] }}x</small></label></td>
                       <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->holiday_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['holiday'] }}x</small></label></td>
                     </tr>
@@ -95,8 +95,28 @@
               <td><label>{{$obj->time_end}}</label></td>
             </tr>
             <tr>
-              <th><label>@lang('common.working_hour')</label></th>
-              <td><label>{{$obj->working_hour}}</label></td>
+              <th><label>@lang('common.actual_time_start')</label></th>
+              <td><label>{{$obj->actual_time_start}}</label></td>
+            </tr>
+            <tr>
+              <th><label>@lang('common.actual_time_end')</label></th>
+              <td><label>{{$obj->actual_time_end}}</label></td>
+            </tr>
+            <tr>
+              <th><label>@lang('common.actual_time_rest_start')</label></th>
+              <td><label>{{$obj->actual_time_start}}</label></td>
+            </tr>
+            <tr>
+              <th><label>@lang('common.actual_time_rest_end')</label></th>
+              <td><label>{{$obj->actual_time_end}}</label></td>
+            </tr>
+            <tr>
+              <th><label>@lang('common.actual_time_rest_start2')</label></th>
+              <td><label>{{$obj->actual_time_start2}}</label></td>
+            </tr>
+            <tr>
+              <th><label>@lang('common.actual_time_rest_end2')</label></th>
+              <td><label>{{$obj->actual_time_end2}}</label></td>
             </tr>
             <tr>
               <th><label>@lang('common.shift')</label></th>
@@ -119,64 +139,7 @@
     </div>
     <div id="collapse-view__actual-working-info" class="collapse show">
       <div class="card-body">
-        <table class="table table-bordered table-striped table-hover table-condensed">
-          <tbody>
-            <tr>
-              <th><label>@lang('common.actual_time_start')</label></th>
-              <td><label>{{$obj->actual_time_start}}</label></td>
-            </tr>
-            <tr>
-              <th><label>@lang('common.actual_time_end')</label></th>
-              <td><label>{{$obj->actual_time_end}}</label></td>
-            </tr>
-            <tr>
-              <th><label>@lang('common.actual_time_rest')</label></th>
-              <td><label>{{$obj->actual_time_rest}}</label></td>
-            </tr>
-            <tr>
-              <th><label>@lang('common.actual_working_hour')</label></th>
-              <td><label>{{$obj->actual_working_hour}}</label></td>
-            </tr>
-            <tr>
-              <th><label>@lang('common.actual_overtime')</label></th>
-              <td><label>{{$obj->actual_overtime}}</label></td>
-            </tr>
-            <tr>
-              <th><label>@lang('common.transport_fee')</label></th>
-              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->transport_fee) }}</label></td>
-            </tr>
-            <tr>
-              <th><label>@lang('common.handling_fee')</label></th>
-              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->handling_fee) }}</label></td>
-            </tr>
-            <tr>
-              <th><label>@lang('common.note')</label></th>
-              <td><label>{!! nl2br($obj->note) !!}</label></td>
-            </tr>
-          </tbody>
-        </table>
-        <h5>計算まとめ</h5>
-        
-        <table class="table table-bordered table-striped table-hover table-condensed">
-          <tbody>
-            <tr>
-              <th><label>@lang('common.actual_working_hour_payment')</label></th>
-              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->actual_working_hour_payment) }}</label></td>
-            </tr>
-            <tr>
-              <th><label>@lang('common.actual_overtime_hour_payment')</label></th>
-              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->actual_overtime_hour_payment) }}</label></td>
-            </tr>
-            <tr>
-              <th><label>@lang('common.user_payment')</label></th>
-              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->user_payment) }}</label></td>
-            </tr>
-            <tr>
-              <th><label>@lang('common.invoice_payment')</label></th>
-              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($obj->invoice_payment) }}</label></td>
-            </tr>
-          </tbody>
-        </table>
+        @include("components.pages.calculation-summary", $obj)
       </div>
     </div>
   </section>

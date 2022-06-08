@@ -11,7 +11,7 @@
         placeholder="@lang('common.name')" />
       <span class="c_form__error-block">{{$errors->first('name')}}</span>
     </div>
-    
+
     <div class="form-group">
       <label>@lang('common.email')</label> <span class="e_required">*</span>
       <input class="form-control form-control-sm"
@@ -19,6 +19,31 @@
         value="{{old('email') ? old('email') : $obj->email}}"
         placeholder="@lang('common.email')" />
       <span class="c_form__error-block">{{$errors->first('email')}}</span>
+    </div>
+
+    <div class="form-group">
+      <label>@lang('common.is_outsource')</label> <span class="e_required">*</span>
+      @php
+        $oldValue = old('is_outsource') ? old('is_outsource') : $obj->is_outsource;
+      @endphp
+      <select name="is_outsource"
+        id="is_outsource"
+        class="form-control form-control-sm">
+      @foreach(App\Helpers\ApplicationConstant::YES_NO as $key => $value)
+        <option value="{{$key}}" {{ $oldValue == $key ? 'selected' : '' }}>
+          @lang('application-constant.YES_NO.'.$value)
+        </option>
+      @endforeach
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>@lang('common.outsource_name')</label>
+      <input class="form-control form-control-sm"
+        name="outsource_name"
+        value="{{old('outsource_name') ? old('outsource_name') : $obj->outsource_name}}"
+        placeholder="@lang('common.outsource_name')" />
+      <span class="c_form__error-block">{{$errors->first('outsource_name')}}</span>
     </div>
 
     <div class="form-group">

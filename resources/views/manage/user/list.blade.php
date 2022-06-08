@@ -36,8 +36,9 @@
         'name' => ['sortable' => true, 'title' => trans('common.name')],
         'username' => ['sortable' => true, 'title' => trans('common.username')],
         'email' => ['sortable' => true, 'title' => trans('common.email')],
+        'outsource_name' => ['sortable' => true, 'title' => trans('common.outsource_name')],
         'is_active' => ['sortable' => true, 'title' => trans('common.is_active')],
-        'created_at' => ['sortable' => true, 'title' => trans('common.created_at')],
+        'reset_password' => ['sortable' => false, 'title' => trans('common.reset').trans('common.password')],
       ]
     ])
       <tbody>
@@ -76,6 +77,7 @@
           <td>{{$row->name}}</td>
           <td>{{$row->username}}</td>
           <td>{{$row->email}}</td>
+          <td>{{$row->outsource_name}}</td>
           <td>
             <form action="{{route('helpers.activation')}}"
               id="grid-action-activation-{{$row->id}}"
@@ -97,7 +99,19 @@
             </button>
             @endif
           </td>
-          <td>{{$row->created_at}}</td>
+          <td>
+            <form action="{{route('manage.user.resetPasswordPost')}}"
+              id="grid-action-reset-password-{{$row->id}}"
+              method="POST"
+            >
+              @csrf
+              <input type="hidden" name="id" value="{{$row->id}}"/>
+            </form>
+            <button class="btn btn-secondary"
+              onClick="document.getElementById('grid-action-reset-password-{{$row->id}}').submit()">
+              <i class="c_icon fas fa-recycle menu-icon"></i> @lang('common.reset') @lang('common.password')
+            </button>
+          </td>
         </tr>
       @endforeach
       </tbody>

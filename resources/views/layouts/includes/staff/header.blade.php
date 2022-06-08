@@ -16,6 +16,93 @@
   function setThousandSeparator(el) {
     el.val(parseInt($(el).val()).toLocaleString('ja'));
   }
+  function renderSimulationData(data) {
+    resetSimulator();
+    id = data['id'];
+    user = data['user'];
+    period = data['period'];
+    place = data['place'];
+    jobtype = data['jobtype'];
+    shift = data['shift'];
+    transportFee = data['transportFee'];
+    timeStart = data['timeStart'];
+    timeEnd = data['timeEnd'];
+    actualTimeStart = data['actualTimeStart'];
+    actualTimeEnd = data['actualTimeEnd'];
+    workingShiftWithRestOvertimeCalculation = [];
+    wageCalculation = [];
+
+    $('#id').html(id);
+    $('#user').html(user);
+    $('#period').html(period);
+    $('#place').html(place);
+    $('#jobtype').html(jobtype);
+    $('#transportFee').html(transportFee.toLocaleString('ja'));
+    $('#shift').html(shift);
+    $('#timeStart').html(timeStart);
+    $('#timeEnd').html(timeEnd);
+    $('#actualTimeStart').html(actualTimeStart);
+    $('#actualTimeEnd').html(actualTimeEnd);
+
+    shifts = ['day','evening','overnight'];
+    shiftsTrans = ['@lang('application-constant.WORKING_SHIFT.day')','@lang('application-constant.WORKING_SHIFT.evening')','@lang('application-constant.WORKING_SHIFT.overnight')'];
+    totalNormal = 0;
+    totalOvertime = 0;
+    stringBuilder = "";
+    for(i = 0; i < shifts.length; i++) {
+      stringBuilder += "<tr>";
+      stringBuilder += "<td>"+shiftsTrans[i]+"</td>";
+      currShift = shifts[i]
+
+      if(data.wageCalculation[currShift] == undefined) {
+        stringBuilder += "<td>-</td>";
+        stringBuilder += "<td>-</td>";
+        stringBuilder += "<td>-</td>";
+        stringBuilder += "<td>-</td>";
+        stringBuilder += "<td>-</td>";
+      } else {
+        stringBuilder += "<td>"+data.workingShiftWithRestOvertimeCalculation[currShift].normal.toLocaleString('ja')+"</td>";
+        stringBuilder += "<td>"+data.workingShiftWithRestOvertimeCalculation[currShift].overtime.toLocaleString('ja')+"</td>";
+        stringBuilder += "<td>"+((data.restShiftCalculation[currShift] == undefined) ? '-' : data.restShiftCalculation[currShift])+"</td>";
+        stringBuilder += "<td>"+data.wageCalculation[currShift].normal.toLocaleString('ja')+"</td>";
+        stringBuilder += "<td>"+data.wageCalculation[currShift].overtime.toLocaleString('ja')+"</td>";
+
+        totalNormal += data.wageCalculation[currShift].normal
+        totalOvertime += data.wageCalculation[currShift].overtime
+
+      }
+      stringBuilder += "</tr>";
+    }
+    $('.items-container').html(stringBuilder);
+    $('#totalWorkingHourPayment').html(totalNormal.toLocaleString('ja'));
+    $('#totalOvertimeHourPayment').html(totalOvertime.toLocaleString('ja'));
+    $('#grandtotal').html((totalNormal + totalOvertime + parseInt(transportFee)).toLocaleString('ja'));
+  }
+
+  function resetSimulator() {
+    shifts = ['day','evening','overnight'];
+    shiftsTrans = ['@lang('application-constant.WORKING_SHIFT.day')','@lang('application-constant.WORKING_SHIFT.evening')','@lang('application-constant.WORKING_SHIFT.overnight')'];
+    totalNormal = 0;
+    totalOvertime = 0;
+    stringBuilder = "";
+    for(i = 0; i < shifts.length; i++) {
+      stringBuilder += "<tr>";
+      stringBuilder += "<td>"+shiftsTrans[i]+"</td>";
+      currShift = shifts[i]
+        stringBuilder += "<td>-</td>";
+        stringBuilder += "<td>-</td>";
+        stringBuilder += "<td>-</td>";
+        stringBuilder += "<td>-</td>";
+        stringBuilder += "<td>-</td>";
+      stringBuilder += "</tr>";
+    }
+    
+    console.log(stringBuilder);
+    $('.items-container').html(stringBuilder);
+    $('#totalWorkingHourPayment').html(totalNormal.toLocaleString('ja'));
+    $('#totalOvertimeHourPayment').html(totalOvertime.toLocaleString('ja'));
+    $('#grandtotal').html((totalNormal + totalOvertime + parseInt(transportFee)).toLocaleString('ja'));
+  }
   $(function($) {
     var changeRowPerPage = function (rpp) {
       $.ajax({

@@ -3,12 +3,8 @@
     method="POST"
     enctype="multipart/form-data">
     @csrf
-    
-    <div class="row">
-      <div class="col-12">
-      </div>
-    </div>
-
+    <input type="hidden" name="place_id" id="place_id" value="{{ $obj->place_id }}" />
+    <input type="hidden" name="date_period" id="period" value="{{ $obj->date_period }}" />
     <div class="row">
       <div class="col-12">
         <section class="card components__card-section-wrapper">
@@ -28,7 +24,7 @@
                   name="actual_time_start"
                   id="actual_time_start"
                   readOnly
-                  value="{{ old('actual_time_start') ? old('actual_time_start') : $obj->actual_time_start->format('Y-m-d H:i') }}"
+                  value="{{ old('actual_time_start') ? old('actual_time_start') : $obj->actual_time_start }}"
                   placeholder="@lang('common.actual_time_start')" />
                 <span class="c_form__error-block">{{$errors->first('actual_time_start')}}</span>
               </div>
@@ -38,19 +34,49 @@
                   name="actual_time_end"
                   id="actual_time_end"
                   readOnly
-                  value="{{ old('actual_time_end') ? old('actual_time_end') : $obj->actual_time_end->format('Y-m-d H:i') }}"
+                  value="{{ old('actual_time_end') ? old('actual_time_end') : $obj->actual_time_end }}"
                   placeholder="@lang('common.actual_time_end')" />
                 <span class="c_form__error-block">{{$errors->first('actual_time_end')}}</span>
               </div>
               <div class="form-group row">
-                <label class="col-sm-1 col-form-label">@lang('common.actual_time_rest') <span class="e_required">*</span></label>
+                <label class="col-sm-1 col-form-label">@lang('common.actual_time_rest_start') <span class="e_required">*</span></label>
                 <input class="form-control form-control-sm col-sm-2"
-                  name="actual_time_rest"
-                  id="actual_time_rest"
+                  name="actual_time_rest_start"
+                  id="actual_time_rest_start"
                   readOnly
-                  value="{{ old('actual_time_rest') ? old('actual_time_rest') : $obj->actual_time_rest }}"
-                  placeholder="@lang('common.actual_time_rest')" />
-                <span class="c_form__error-block">{{$errors->first('actual_time_rest')}}</span>
+                  value="{{ old('actual_time_rest_start') ? old('actual_time_rest_start') : $obj->actual_time_rest_start }}"
+                  placeholder="@lang('common.actual_time_rest_start')" />
+                <span class="c_form__error-block">{{$errors->first('actual_time_rest_start')}}</span>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">@lang('common.actual_time_rest_end') <span class="e_required">*</span></label>
+                <input class="form-control form-control-sm col-sm-2"
+                  name="actual_time_rest_end"
+                  id="actual_time_rest_end"
+                  readOnly
+                  value="{{ old('actual_time_rest_end') ? old('actual_time_rest_end') : $obj->actual_time_rest_end }}"
+                  placeholder="@lang('common.actual_time_rest_end')" />
+                <span class="c_form__error-block">{{$errors->first('actual_time_rest_end')}}</span>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">@lang('common.actual_time_rest_start2') <span class="e_required">*</span></label>
+                <input class="form-control form-control-sm col-sm-2"
+                  name="actual_time_rest_start2"
+                  id="actual_time_rest_start2"
+                  readOnly
+                  value="{{ old('actual_time_rest_start2') ? old('actual_time_rest_start2') : $obj->actual_time_rest_start2 }}"
+                  placeholder="@lang('common.actual_time_rest_start2')" />
+                <span class="c_form__error-block">{{$errors->first('actual_time_rest_start2')}}</span>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">@lang('common.actual_time_rest_end2') <span class="e_required">*</span></label>
+                <input class="form-control form-control-sm col-sm-2"
+                  name="actual_time_rest_end2"
+                  id="actual_time_rest_end2"
+                  readOnly
+                  value="{{ old('actual_time_rest_end2') ? old('actual_time_rest_end2') : $obj->actual_time_rest_end2 }}"
+                  placeholder="@lang('common.actual_time_rest_end2')" />
+                <span class="c_form__error-block">{{$errors->first('actual_time_rest_end2')}}</span>
               </div>
               <div class="form-group row">
                 <label class="col-sm-1 col-form-label">@lang('common.transport_fee') <span class="e_required">*</span></label>
@@ -70,26 +96,13 @@
                   placeholder="@lang('common.note')">{{ old('note') ? old('note') : $obj->note }}</textarea>
                 <span class="c_form__error-block">{{$errors->first('note')}}</span>
               </div>
-            
-              <div class="form-group row">
-                <label class="col-sm-1 col-form-label">@lang('common.actual_working_hour') <span class="e_required">*</span></label>
-                <input class="form-control form-control-sm col-sm-2"
-                  name="actual_working_hour"
-                  id="actual_working_hour"
-                  readOnly
-                  value="{{ old('actual_working_hour') ? old('actual_working_hour') : $obj->actual_working_hour }}"
-                  placeholder="@lang('common.actual_working_hour')" />
-                  <span class="c_form__error-block">{{$errors->first('actual_working_hour')}}</span>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-1 col-form-label">@lang('common.actual_overtime') <span class="e_required">*</span></label>
-                <input class="form-control form-control-sm col-sm-2"
-                  name="actual_overtime"
-                  id="actual_overtime"
-                  readOnly
-                  value="{{ old('actual_overtime') ? old('actual_overtime') : $obj->actual_overtime }}"
-                  placeholder="@lang('common.actual_overtime')" />
-                <span class="c_form__error-block">{{$errors->first('actual_overtime')}}</span>
+              
+              <div>
+                <button type="button" class="btn btn-outline-primary simulation">
+                  <span class="action-icon">
+                    <i class="c_icon fas fa-save menu-icon"></i> @lang('common.simulation')
+                  </span>
+                </button>
               </div>
             </div>
           </div>
@@ -110,59 +123,7 @@
           </div>
           <div id="collapse-view__actual-summary-info" class="collapse show">
             <div class="card-body">
-              <div>
-                <button type="button" class="btn btn-outline-primary calculate">
-                  <span class="action-icon">
-                    <i class="c_icon fas fa-calculator menu-icon"></i> @lang('common.calculate')
-                  </span>
-                </button>
-              </div>
-
-              <h5>計算まとめ</h5>
-              <table class="table table-bordered table-striped table-hover table-condensed">
-                <tbody>
-                  <tr>
-                    <th><label><label>@lang('common.actual_working_hour_payment')</label></label></th>
-                    <td><label>
-                      <input class="form-control form-control-sm price-field"
-                        name="actual_working_hour_payment"
-                        id="actual_working_hour_payment"
-                        value="{{ old('actual_working_hour_payment') ? old('actual_working_hour_payment') : $obj->actual_working_hour_payment }}"
-                        readOnly
-                        placeholder="@lang('common.actual_working_hour_payment')" />
-                      <span class="c_form__error-block">{{$errors->first('actual_working_hour_payment')}}</span>
-                      <small id="emailHelp" class="form-text text-muted">
-                        
-                      </small>
-                    </label></td>
-                  </tr>
-                  <tr>
-                    <th><label><label>@lang('common.actual_overtime_hour_payment')</label></label></th>
-                    <td><label>
-                      <input class="form-control form-control-sm price-field"
-                        name="actual_overtime_hour_payment"
-                        id="actual_overtime_hour_payment"
-                        value="{{ old('actual_overtime_hour_payment') ? old('actual_overtime_hour_payment') : $obj->actual_overtime_hour_payment }}"
-                        readOnly
-                        placeholder="@lang('common.actual_overtime_hour_payment')" />
-                      <span class="c_form__error-block">{{$errors->first('actual_overtime_hour_payment')}}</span>
-                    </label></td>
-                  </tr>
-                  <tr>
-                    <th><label><label>@lang('common.user_payment')</label></label></th>
-                    <td><label>
-                      <input class="form-control form-control-sm price-field"
-                        name="user_payment"
-                        id="user_payment"
-                        value="{{ old('user_payment') ? old('user_payment') : $obj->user_payment }}"
-                        readOnly
-                        placeholder="@lang('common.user_payment')" />
-                      <span class="c_form__error-block">{{$errors->first('user_payment')}}</span>
-                    </label></td>
-                  </tr>
-                </tbody>
-              </table>
-
+              @include("components.pages.calculation-summary", $obj)
               <div>
                 <button type="submit" class="btn btn-outline-primary">
                   <span class="action-icon">
@@ -180,100 +141,33 @@
 @section('javascript')
 
 <script>
-  $(function() {
-    morningWage = {{ $obj->morning_wage }};
-    noonWage = {{ $obj->noon_wage }};
-    nightWage = {{ $obj->night_wage }};
-    overtimeWage = {{ $obj->overtime_wage }};
-    nightOvertimeWage = {{ $obj->night_overtime_wage }};
-    holidayWage = {{ $obj->holiday_wage }};
-    shift = "{{ $obj->shift }}";
-
-    normalWage = 0;
-    otWage = 0;
-
-    if(shift == "morning") {
-      normalWage = morningWage;
-      otWage = overtimeWage;
-    } else if(shift == "noon") {
-      normalWage = noonWage;
-      otWage = overtimeWage;
-    } else {
-      normalWage = nightWage;
-      otWage = nightOvertimeWage;
-    }
-    normalWagePerMinute = normalWage / 60;
-    otWagePerMinute = otWage / 60;
-
-    $('#actual_time_start, #actual_time_end').datetimepicker({
+  $( function() {
+    $('#actual_time_start, #actual_time_end, #actual_time_rest_start, #actual_time_rest_start2, #actual_time_rest_end, #actual_time_rest_end2').datetimepicker({
       dateFormat: "yy-mm-dd",
-      timeFormat: "HH:mm",
+      timeFormat: "HH:mm:ss",
       stepMinute: 15,
     });
-    $('#actual_time_rest').timepicker({
-      timeFormat: "HH:mm",
-      stepMinute: 15,
+
+    $('.simulation').click(function() {
+      $.ajax({
+        url: '{{ route("staff.callcenter.simulation") }}',
+        data: {
+          id: {{ $obj->id }},
+          place_id: $('#place_id').val(),
+          period: $('#period').val(),
+          transport_fee: $('#transport_fee').val().replaceAll(',', ''),
+          actual_time_start: $('#actual_time_start').val(),
+          actual_time_end: $('#actual_time_end').val(),
+          actual_time_rest_start: $('#actual_time_rest_start').val(),
+          actual_time_rest_end: $('#actual_time_rest_end').val(), 
+          actual_time_rest_start2: $('#actual_time_rest_start2').val(),
+          actual_time_rest_end2: $('#actual_time_rest_end2').val()
+        },
+        success: function(data) {
+          renderSimulationData(JSON.parse(data));
+        }
+      });
     });
-    $('#actual_time_start, #actual_time_end, #actual_time_rest, #transport_fee').change(function() {
-      console.log(1);
-      calculateWorkingHour();
-    });
-    $(".calculate").click(function () {
-      calculateWorkingHour();
-    });
-
-    function calculateWorkingHour() {
-      transportFee = parseInt($("#transport_fee").val().replace(/,/g, ''));
-      
-      actualStart = $("#actual_time_start").val();
-      momentActualStart = moment(actualStart+":00");
-      actualEnd = $("#actual_time_end").val();
-      momentActualEnd = moment(actualEnd+":00");
-      actualRest = $("#actual_time_rest").val();
-      momentActualRest = moment.duration(actualRest+":00");
-      
-
-      endSubstractRestDuration = momentActualEnd.subtract(momentActualRest);
-      actualWorkingDuration = getTimeDiff(moment(actualStart),endSubstractRestDuration);
-
-      actualWorkingDurationHour = actualWorkingDuration[0];
-      actualWorkingDurationMinute = actualWorkingDuration[1];
-      actualOvertimeHour = 0;
-      actualOvertimeMinute = 0;
-      if(actualWorkingDuration[0] > 8) {
-        actualWorkingDurationHour = 8;
-        actualWorkingDurationMinute = 0;
-        actualOvertimeMinute = actualWorkingDuration[1];
-        actualOvertimeHour = actualWorkingDuration[0] - actualWorkingDurationHour;
-      }
-
-      $("#actual_working_hour").val(actualWorkingDurationHour+":"+actualWorkingDurationMinute);
-      $("#actual_overtime").val(actualOvertimeHour+":"+actualOvertimeMinute);
-
-      actualWorkingHourPayment = normalWage * actualWorkingDurationHour;
-      actualWorkingHourPayment += normalWagePerMinute * actualWorkingDurationMinute;
-      actualOvertimeHourPayment = otWage * actualOvertimeHour;
-      actualOvertimeHourPayment += otWagePerMinute * actualOvertimeMinute;
-
-      $("#actual_working_hour_payment").val(actualWorkingHourPayment).blur();
-      $("#actual_overtime_hour_payment").val(actualOvertimeHourPayment).blur();
-      userPayment = actualWorkingHourPayment + actualOvertimeHourPayment + transportFee;
-      $("#user_payment").val(userPayment).blur();
-    }
-
-    function getTimeDiff(t1, t2) {
-      var diff = t2.diff(t1);
-      var tempTime = moment.duration(diff);
-
-      day = tempTime._data.days
-      hour = tempTime._data.hours
-      minute = tempTime._data.minutes
-
-      if (day > 0)
-        hour = hour + (day * 24);
-
-      return [hour, minute]
-    }
   });
 </script>
 @endsection

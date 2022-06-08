@@ -7,10 +7,10 @@
     <table class="grid-table table table-striped table-bordered table-responsive-sm">
       <thead>
         <th>@lang('common.jobtype')</th>
-        <th>@lang('common.morning_wage')</th>
-        <th>@lang('common.noon_wage')</th>
-        <th>@lang('common.night_wage')</th>
-        <th>@lang('common.night_overtime_wage')</th>
+        <th>@lang('common.day_wage')</th>
+        <th>@lang('common.evening_wage')</th>
+        <th>@lang('common.overnight_wage')</th>
+        <th>@lang('common.overtime_overnight_wage')</th>
         <th>@lang('common.overtime_wage')</th>
         <th>@lang('common.holiday_wage')</th>
         <th>@lang('common.action')</th>
@@ -35,61 +35,61 @@
           </td>
           <td>
             <div class="form-group">
-              <input class="form-control form-control-sm morning-wage price-field"
-                name="morning_wage[]"
-                value="{{old('morning_wage') ? old('morning_wage') : $wage->morning_wage}}"
-                placeholder="@lang('common.morning_wage')" />
-              <span class="c_form__error-block">{{$errors->first('morning_wage')}}</span>
+              <input class="form-control form-control-sm day-wage price-field"
+                name="day[]"
+                value="{{old('day') ? old('day') : $wage->day}}"
+                placeholder="@lang('common.day')" />
+              <span class="c_form__error-block">{{$errors->first('day')}}</span>
             </div>
           </td>
           <td>
             <div class="form-group">
-              <input class="form-control form-control-sm noon-wage price-field"
-                name="noon_wage[]"
-                rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['noon'] }}"
-                value="{{old('noon_wage') ? old('noon_wage') : $wage->noon_wage}}"
-                placeholder="@lang('common.noon_wage')" />
-              <span class="c_form__error-block">{{$errors->first('noon_wage')}}</span>
+              <input class="form-control form-control-sm evening-wage price-field"
+                name="evening[]"
+                rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['evening'] }}"
+                value="{{old('evening') ? old('evening') : $wage->evening}}"
+                placeholder="@lang('common.evening')" />
+              <span class="c_form__error-block">{{$errors->first('evening')}}</span>
             </div>
           </td>
           <td>
             <div class="form-group">
-              <input class="form-control form-control-sm night-wage price-field"
-                name="night_wage[]"
-                rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['night'] }}"
-                value="{{old('night_wage') ? old('night_wage') : $wage->night_wage}}"
-                placeholder="@lang('common.night_wage')" />
-              <span class="c_form__error-block">{{$errors->first('night_wage')}}</span>
+              <input class="form-control form-control-sm overnight-wage price-field"
+                name="overnight[]"
+                rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overnight'] }}"
+                value="{{old('overnight') ? old('overnight') : $wage->overnight}}"
+                placeholder="@lang('common.overnight')" />
+              <span class="c_form__error-block">{{$errors->first('overnight')}}</span>
             </div>
           </td>
           <td>
             <div class="form-group">
-              <input class="form-control form-control-sm night-overtime-wage price-field"
-                name="night_overtime_wage[]"
-                rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['night_overtime'] }}"
-                value="{{old('night_overtime_wage') ? old('night_overtime_wage') : $wage->night_overtime_wage}}"
-                placeholder="@lang('common.night_overtime_wage')" />
-              <span class="c_form__error-block">{{$errors->first('night_overtime_wage')}}</span>
+              <input class="form-control form-control-sm overnight-overtime-wage price-field"
+                name="overtime_overnight[]"
+                rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime_overnight'] }}"
+                value="{{old('overtime_overnight') ? old('overtime_overnight') : $wage->overtime_overnight}}"
+                placeholder="@lang('common.overtime_overnight')" />
+              <span class="c_form__error-block">{{$errors->first('overtime_overnight')}}</span>
             </div>
           </td>
           <td>
             <div class="form-group">
               <input class="form-control form-control-sm overtime-wage price-field"
-                name="overtime_wage[]"
+                name="overtime[]"
                 rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime'] }}"
-                value="{{old('overtime_wage') ? old('overtime_wage') : $wage->overtime_wage}}"
-                placeholder="@lang('common.overtime_wage')" />
-              <span class="c_form__error-block">{{$errors->first('overtime_wage')}}</span>
+                value="{{old('overtime') ? old('overtime') : $wage->overtime}}"
+                placeholder="@lang('common.overtime')" />
+              <span class="c_form__error-block">{{$errors->first('overtime')}}</span>
             </div>
           </td>
           <td>
             <div class="form-group">
               <input class="form-control form-control-sm holiday-wage price-field"
-                name="holiday_wage[]"
+                name="holiday[]"
                 rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['holiday'] }}"
-                value="{{old('holiday_wage') ? old('holiday_wage') : $wage->holiday_wage}}"
-                placeholder="@lang('common.holiday_wage')" />
-              <span class="c_form__error-block">{{$errors->first('holiday_wage')}}</span>
+                value="{{old('holiday') ? old('holiday') : $wage->holiday}}"
+                placeholder="@lang('common.holiday')" />
+              <span class="c_form__error-block">{{$errors->first('holiday')}}</span>
             </div>
           </td>
           <td>
@@ -132,56 +132,56 @@
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control form-control-sm morning-wage price-field"
-          name="morning_wage[]"
+        <input class="form-control form-control-sm day-wage price-field"
+          name="day[]"
           value="0"
-          placeholder="@lang('common.morning_wage')" />
+          placeholder="@lang('common.day')" />
       </div>
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control form-control-sm noon-wage price-field"
-          name="noon_wage[]"
-          rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['noon'] }}"
+        <input class="form-control form-control-sm evening-wage price-field"
+          name="evening[]"
+          rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['evening'] }}"
           value="0"
-          placeholder="@lang('common.noon_wage')" />
+          placeholder="@lang('common.evening')" />
       </div>
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control form-control-sm night-wage price-field"
-          name="night_wage[]"
-          rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['night'] }}"
+        <input class="form-control form-control-sm overnight-wage price-field"
+          name="overnight[]"
+          rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overnight'] }}"
           value="0"
-          placeholder="@lang('common.night_wage')" />
+          placeholder="@lang('common.overnight')" />
       </div>
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control form-control-sm night-overtime-wage price-field"
-          name="night_overtime_wage[]"
-          rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['night_overtime'] }}"
+        <input class="form-control form-control-sm overtime-overnight-wage price-field"
+          name="overtime_overnight[]"
+          rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime_overnight'] }}"
           value="0"
-          placeholder="@lang('common.night_overtime_wage')" />
+          placeholder="@lang('common.overtime_overnight')" />
       </div>
     </td>
     <td>
       <div class="form-group">
         <input class="form-control form-control-sm overtime-wage price-field"
-          name="overtime_wage[]"
+          name="overtime[]"
           rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime'] }}"
           value="0"
-          placeholder="@lang('common.overtime_wage')" />
-        <span class="c_form__error-block">{{$errors->first('overtime_wage')}}</span>
+          placeholder="@lang('common.overtime')" />
+        <span class="c_form__error-block">{{$errors->first('overtime')}}</span>
       </div>
     </td>
     <td>
       <div class="form-group">
         <input class="form-control form-control-sm holiday-wage price-field"
-          name="holiday_wage[]"
+          name="holiday[]"
           rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['holiday'] }}"
           value="0"
-          placeholder="@lang('common.holiday_wage')" />
+          placeholder="@lang('common.holiday')" />
       </div>
     </td>
     <td>

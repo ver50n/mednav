@@ -18,10 +18,6 @@ class ApplicationConstant
     ];
 
     const WORKING_SHIFT = [
-        'morning' => 'morning',
-        'noon' => 'noon',
-        'night' => 'night',
-
         'day' => 'day',
         'evening' => 'evening',
         'overnight' => 'overnight'
@@ -33,11 +29,11 @@ class ApplicationConstant
     ];
 
     const EXCEPTION_WAGE_RATE = [
-        'morning' => 1,
-        'noon' => 1,
-        'night' => 1.25,
+        'day' => 1,
+        'evening' => 1,
+        'overnight' => 1.25,
         'overtime' => 1.25,
-        'night_overtime' => 1.5,
+        'overtime_overnight' => 1.5,
         'holiday' => 1.35,
     ];
 

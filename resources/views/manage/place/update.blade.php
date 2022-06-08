@@ -125,32 +125,32 @@
     $(targetWageClass).on('click','.remove-wage-clone', function() {
       removeWageClone($(this));
     });
-    $(targetWageClass).on('change','.morning-wage', function() {
+    $(targetWageClass).on('change','.day-wage', function() {
       updateExceptionalRate($(this));
     });
 
     function updateExceptionalRate(el) {
       row = el.parent().parent().parent();
-      morningWage = el.val();
+      dayWage = el.val();
 
-      noonWage = row.find('.noon-wage')
-      noonWage.val(Math.floor(noonWage.attr('rate') * morningWage));
-      setThousandSeparator(noonWage);
+      eveningWage = row.find('.evening-wage')
+      eveningWage.val(Math.floor(eveningWage.attr('rate') * dayWage));
+      setThousandSeparator(eveningWage);
 
-      nightWage = row.find('.night-wage')
-      nightWage.val(Math.floor(nightWage.attr('rate') * morningWage));
-      setThousandSeparator(nightWage);
+      overnightWage = row.find('.overnight-wage')
+      overnightWage.val(Math.floor(overnightWage.attr('rate') * dayWage));
+      setThousandSeparator(overnightWage);
       
-      nightOvertimeWage = row.find('.night-overtime-wage')
-      nightOvertimeWage.val(Math.floor(nightOvertimeWage.attr('rate') * morningWage));
-      setThousandSeparator(nightOvertimeWage);
+      overtimeOvernightWage = row.find('.overtime-overnight-wage')
+      overtimeOvernightWage.val(Math.floor(overtimeOvernightWage.attr('rate') * dayWage));
+      setThousandSeparator(overtimeOvernightWage);
 
       overtimeWage = row.find('.overtime-wage')
-      overtimeWage.val(Math.floor(overtimeWage.attr('rate') * morningWage));
+      overtimeWage.val(Math.floor(overtimeWage.attr('rate') * dayWage));
       setThousandSeparator(overtimeWage);
 
       holidayWage = row.find('.holiday-wage')
-      holidayWage.val(Math.floor(holidayWage.attr('rate') * morningWage));
+      holidayWage.val(Math.floor(holidayWage.attr('rate') * dayWage));
       setThousandSeparator(holidayWage);
 
       setThousandSeparator(el);
@@ -183,17 +183,18 @@
       cloneShiftObj.removeClass('clone-shift-source');
       cloneShiftObj.find('.start-hour').removeClass('hasDatepicker');
       cloneShiftObj.find('.end-hour').removeClass('hasDatepicker');
+      cloneShiftObj.find('.overlap-hour').removeClass('hasDatepicker');
       $(targetShiftClass).append(cloneShiftObj);
 
-      cloneShiftObj.find('.start-hour, .end-hour').timepicker({
+      cloneShiftObj.find('.start-hour, .end-hour, .overlap-hour').timepicker({
         timeFormat: "HH:mm",
-        stepMinute: 30,
+        stepMinute: 15,
       });
     }
     
-    $('.start-hour,.end-hour').timepicker({
+    $('.start-hour, .end-hour, .overlap-hour').timepicker({
       timeFormat: "HH:mm",
-      stepMinute: 30,
+      stepMinute: 15,
     });
 
     function removeShiftClone(el) {
