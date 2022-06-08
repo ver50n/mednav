@@ -420,7 +420,7 @@ class Callcenter extends Model
         // get first shift
         $startShift = 'day';
         if (strtotime($startTime) < strtotime($oriShifts[0]["start_hour"])) {
-            $startShift = end($oriShifts);
+            $startShift = $oriShifts[2];
             $startShift = $startShift['shift'];
         } else {
             foreach($oriShifts as $each) {

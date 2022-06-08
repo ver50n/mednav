@@ -175,7 +175,7 @@
 
     function init() {
       {{count($obj->placeHourlywages) == 0 ? "addWageClone();" : "" }}
-      {{count($obj->placeShiftHours) == 0 ? "addShiftClone();" : "" }}
+      //{{count($obj->placeShiftHours) == 0 ? "addShiftClone();" : "" }}
     }
 
     function addShiftClone() {

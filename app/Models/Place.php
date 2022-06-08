@@ -23,6 +23,11 @@ class Place extends Model
         return $this->hasMany(\App\Models\PlaceShiftHour::Class);
     }
 
+    public function placeShiftHourbyShift($shift)
+    {
+        return $this->hasOne(\App\Models\PlaceShiftHour::Class)->where('shift', $shift);
+    }
+
     public function add($data)
     {
         $validator = null;

@@ -28,9 +28,7 @@ class PlaceShiftHour extends Model
             $rules = [
                 'place_id' => [
                     'required',
-                    Rule::exists('places', 'id')->where(function ($query) {
-                        return $query->where('is_active', 1);
-                    }),
+                    Rule::exists('places', 'id'),
                 ],
                 'shift' => [
                     'required',
@@ -42,7 +40,6 @@ class PlaceShiftHour extends Model
 
             $validator = Validator::make($data, $rules);
             if($validator->fails()) {
-                dd($validator->messages()->get('*'));
                 return $validator;
             }
             $this->fill($data);
