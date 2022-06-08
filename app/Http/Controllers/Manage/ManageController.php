@@ -16,7 +16,7 @@ class ManageController extends Controller
 {
     public function calculation()
     {
-        $cc = new CallCenter();
+        $cc = new Callcenter();
         $cc->date_period = '2022-06-06';
         $cc->user_id = 1;
         $cc->place_id = 5;
@@ -69,7 +69,7 @@ class ManageController extends Controller
                 $cc = new Callcenter();
                 $ccdata['date_period'] = $period;
                 $ccdata['user_id'] = $user->id;
-                $ccdata['place_id'] = 5;
+                $ccdata['place_id'] = 1;
                 $ccdata['time_start'] = $start;
                 $ccdata['time_end'] = $end;
                 $result = $cc->register($ccdata);
