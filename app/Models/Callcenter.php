@@ -110,6 +110,7 @@ class Callcenter extends Model
                 return $validator;
 
             $this->fill($data);
+            $this->setShift();
 
             $params = $this->calculateSimulation();
             if($params['actualTimeStart']) {
@@ -174,8 +175,8 @@ class Callcenter extends Model
     public function setShift()
     {
         $placeId = $this->place_id;
-        $period = $this->period;
-        $startTime = new DateTimeInherit($this->start_time);
+        $period = $this->date_period;
+        $startTime = new DateTimeInherit($this->time_start);
 
         $shifts = PlaceShiftHour::where('place_id', $placeId)->get();
         if (!$shifts)

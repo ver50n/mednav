@@ -86,7 +86,7 @@
                   name="time_start"
                   id="time_start"
                   readOnly
-                  value="{{ old('time_start') ? old('time_start') : date('Y-m-d 00:00') }}"
+                  value="{{ old('time_start') ? old('time_start') : date('Y-m-d 00:00:00') }}"
                   placeholder="@lang('common.time_start')" />
                 <span class="c_form__error-block">{{$errors->first('time_start')}}</span>
               </div>
@@ -96,7 +96,7 @@
                   name="time_end"
                   id="time_end"
                   readOnly
-                  value="{{ old('time_end') ? old('time_end') : date('Y-m-d 00:00') }}"
+                  value="{{ old('time_end') ? old('time_end') : date('Y-m-d 00:00:00') }}"
                   placeholder="@lang('common.time_end')" />
                 <span class="c_form__error-block">{{$errors->first('time_end')}}</span>
               </div>

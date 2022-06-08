@@ -89,7 +89,7 @@ class ManageController extends Controller
 
     public function dashboard()
     {
-        //$this->csvReader();
+        $this->csvReader();
         return view('manage.dashboard', [
         ]);
     }
