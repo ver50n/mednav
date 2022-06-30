@@ -40,7 +40,7 @@ class ManageController extends Controller
         $dataDirectory = resource_path("data");
         $row = 0;
         $max = 1;
-        if (($handle = fopen($dataDirectory.'/cc-june.csv', "r")) !== FALSE) {
+        if (($handle = fopen($dataDirectory.'/cc-july.csv', "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 $row++;
                 if($row == 1)
@@ -62,16 +62,17 @@ class ManageController extends Controller
 
                 $user = User::where("name", $nameForLookup)->first();
                 if(!$user) {
-                    echo "error (user not found) : ".$name." ".$row."<br />";
+                    echo "error (user not found) : ".$name." / ".$nameForLookup." ".$row."<br />";
                     continue;
                 }
 
                 $cc = new Callcenter();
                 $ccdata['date_period'] = $period;
                 $ccdata['user_id'] = $user->id;
-                $ccdata['place_id'] = 1;
+                $ccdata['place_id'] = 5;
                 $ccdata['time_start'] = $start;
                 $ccdata['time_end'] = $end;
+                $ccdata['status'] = 'open';
                 $result = $cc->register($ccdata);
 
                 if($result === true) {
@@ -89,7 +90,7 @@ class ManageController extends Controller
 
     public function dashboard()
     {
-        // $this->csvReader();
+        $this->csvReader();
         return view('manage.dashboard', [
         ]);
     }
