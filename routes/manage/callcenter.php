@@ -31,3 +31,9 @@
   Route::get('/simulation', $controller.'@simulation')
     ->name($module.'.simulation')
     ->middleware([]);
+  Route::get('/report', $controller.'@report')
+    ->name($module.'.report')
+    ->middleware([]);
+  Route::get('/report-monthly', $controller.'@reportMonthly')
+    ->name($module.'.reportMonthly')
+    ->middleware([]);

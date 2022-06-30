@@ -35,7 +35,7 @@
           </td>
           <td>
             <div class="form-group">
-              <input class="form-control form-control-sm day-wage price-field"
+              <input class="form-control form-control-sm day-wage"
                 name="day[]"
                 value="{{old('day') ? old('day') : $wage->day}}"
                 placeholder="@lang('common.day')" />
@@ -44,7 +44,7 @@
           </td>
           <td>
             <div class="form-group">
-              <input class="form-control form-control-sm evening-wage price-field"
+              <input class="form-control form-control-sm evening-wage"
                 name="evening[]"
                 rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['evening'] }}"
                 value="{{old('evening') ? old('evening') : $wage->evening}}"
@@ -54,7 +54,7 @@
           </td>
           <td>
             <div class="form-group">
-              <input class="form-control form-control-sm overnight-wage price-field"
+              <input class="form-control form-control-sm overnight-wage"
                 name="overnight[]"
                 rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overnight'] }}"
                 value="{{old('overnight') ? old('overnight') : $wage->overnight}}"
@@ -64,7 +64,7 @@
           </td>
           <td>
             <div class="form-group">
-              <input class="form-control form-control-sm overnight-overtime-wage price-field"
+              <input class="form-control form-control-sm overtime-overnight-wage"
                 name="overtime_overnight[]"
                 rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime_overnight'] }}"
                 value="{{old('overtime_overnight') ? old('overtime_overnight') : $wage->overtime_overnight}}"
@@ -74,7 +74,7 @@
           </td>
           <td>
             <div class="form-group">
-              <input class="form-control form-control-sm overtime-wage price-field"
+              <input class="form-control form-control-sm overtime-wage"
                 name="overtime[]"
                 rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime'] }}"
                 value="{{old('overtime') ? old('overtime') : $wage->overtime}}"
@@ -84,7 +84,7 @@
           </td>
           <td>
             <div class="form-group">
-              <input class="form-control form-control-sm holiday-wage price-field"
+              <input class="form-control form-control-sm holiday-wage"
                 name="holiday[]"
                 rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['holiday'] }}"
                 value="{{old('holiday') ? old('holiday') : $wage->holiday}}"
@@ -132,7 +132,7 @@
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control form-control-sm day-wage price-field"
+        <input class="form-control form-control-sm day-wage"
           name="day[]"
           value="0"
           placeholder="@lang('common.day')" />
@@ -140,7 +140,7 @@
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control form-control-sm evening-wage price-field"
+        <input class="form-control form-control-sm evening-wage"
           name="evening[]"
           rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['evening'] }}"
           value="0"
@@ -149,7 +149,7 @@
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control form-control-sm overnight-wage price-field"
+        <input class="form-control form-control-sm overnight-wage"
           name="overnight[]"
           rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overnight'] }}"
           value="0"
@@ -158,7 +158,7 @@
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control form-control-sm overtime-overnight-wage price-field"
+        <input class="form-control form-control-sm overtime-overnight-wage"
           name="overtime_overnight[]"
           rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime_overnight'] }}"
           value="0"
@@ -167,7 +167,7 @@
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control form-control-sm overtime-wage price-field"
+        <input class="form-control form-control-sm overtime-wage"
           name="overtime[]"
           rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime'] }}"
           value="0"
@@ -177,7 +177,7 @@
     </td>
     <td>
       <div class="form-group">
-        <input class="form-control form-control-sm holiday-wage price-field"
+        <input class="form-control form-control-sm holiday-wage"
           name="holiday[]"
           rate="{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['holiday'] }}"
           value="0"

@@ -106,8 +106,9 @@ class Callcenter extends Model
             ];
 
             $validator = Validator::make($data, $rules);
-            if($validator->fails())
+            if($validator->fails()){
                 return $validator;
+            }
 
             $this->fill($data);
             $this->setShift();
@@ -135,6 +136,12 @@ class Callcenter extends Model
                 if(isset($params['restShiftCalculation']['overnight'])) {
                     $this->actual_rest_hour_overnight_shift = $params['restShiftCalculation']['overnight'];
                 }
+                if(isset($params['typeCalculation']['normal'])) {
+                    $this->actual_normal_hour = $params['typeCalculation']['normal'];
+                }
+                if(isset($params['typeCalculation']['overtime'])) {
+                    $this->actual_overtime_hour = $params['typeCalculation']['overtime'];
+                }
 
                 $totalNormal = 0;
                 $totalOvertime = 0;
@@ -152,6 +159,7 @@ class Callcenter extends Model
                 $this->actual_working_hour_payment = $totalNormal;
                 $this->actual_overtime_hour_payment = $totalOvertime;
                 $this->user_payment = $totalNormal + $totalOvertime + $this->transport_fee;
+                $this->actual_payment = $this->user_payment;
             }
             $this->save();
 
@@ -223,6 +231,8 @@ class Callcenter extends Model
         $this->actual_payment_overtime_day = 0;
         $this->actual_payment_overtime_evening = 0;
         $this->actual_payment_overtime_overnight = 0;
+        $this->actual_normal_hour = 0;
+        $this->actual_overtime_hour = 0;
         $this->actual_working_hour_payment = 0;
         $this->actual_overtime_hour_payment = 0;
         $this->user_payment = 0;
@@ -244,6 +254,7 @@ class Callcenter extends Model
             'workingShiftCalculation' => [],
             'restShiftCalculation' => [],
             'actualTotalWorkingHourAfterRest' => null,
+            'typeCalculation' => [],
             'workingShiftAfterRestCalculation' => [],
             'workingShiftWithRestOvertimeCalculation' => [],
         ];
@@ -297,6 +308,7 @@ class Callcenter extends Model
         $params['workingShiftCalculation'] = $this->getShiftCalculation($startWorkingShift, $actualTimeStart, $actualTimeEnd, $params['actualWorkingHour'], $workingShifts);
         $params['workingShiftAfterRestCalculation'] = $this->getWorkingShiftAfterRestCalculation($params['workingShiftCalculation'], $params['restShiftCalculation'], $workingShifts, $period, $actualTimeStart);
         $params['workingShiftWithRestOvertimeCalculation'] = $this->getWorkingShiftWithRestOvertimeCalculation($params['workingShiftAfterRestCalculation'], $params['restShiftCalculation'], $params['actualTotalWorkingHourAfterRest'], $workingShifts, $period);
+        $params['typeCalculation'] = $this->getTypeCalculation($params['workingShiftWithRestOvertimeCalculation']);
         $params['wageCalculation'] = $this->getWageCalculation($params['workingShiftWithRestOvertimeCalculation'], $wages);
         $params = array_replace($params,$this->convertReadableDatetime($params));
 
@@ -336,10 +348,25 @@ class Callcenter extends Model
         return $wage;
     }
 
+    public function getTypeCalculation($workingShiftWithRestOvertimeCalculation)
+    {
+        $return = [
+            'normal' => new DateInterval('PT0H'),
+            'overtime' => new DateInterval('PT0H'),
+        ];
+        $total = 0;
+        foreach($workingShiftWithRestOvertimeCalculation as $shift => $calculation) {
+            foreach($calculation as $eachDuration => $value) {
+                $return[$eachDuration] = $this->addDateIntervals($return[$eachDuration], $value);
+            }
+        }
+
+        return $return;
+    }
+
     public function getWageCalculation($workingShiftWithRestOvertimeCalculation, $wages)
     {
         $return = [];
-        $total = 0;
         foreach($workingShiftWithRestOvertimeCalculation as $shift => $calculation) {
             $temp = [];
             foreach($calculation as $eachDuration => $value) {
@@ -351,7 +378,6 @@ class Callcenter extends Model
                 $wagePerMinute = $wagePerHour / 60;
                 $calculatedWage = ($value->h * $wagePerHour) + ($value->i * $wagePerMinute);
                 $temp[$eachDuration] = $calculatedWage;
-                $total +=  $calculatedWage;
             }
             $return[$shift] = $temp;
         }
@@ -409,6 +435,12 @@ class Callcenter extends Model
             $workingShiftWithRestOvertimeCalculation[$shift] = $temp;
         }
         $return['workingShiftWithRestOvertimeCalculation'] = $workingShiftWithRestOvertimeCalculation;
+
+        $typeCalculation = [];
+        foreach($params['typeCalculation'] as $type => $value) {
+            $typeCalculation[$type] = $value->format('%H:%I');;
+        }
+        $return['typeCalculation'] = $typeCalculation;
 
         return $return;
     }
@@ -634,15 +666,27 @@ class Callcenter extends Model
 
     public function subtractDateIntervals($intervalOne, $intervalTwo)
     {
-        $keys = ["y", "m", "d", "h", "i", "s"];
+        $keys = ["s", "i", "h", "d", "m", "y"];
 
         $intervalArrayOne = array_intersect_key((array)$intervalOne, array_flip($keys));
         $intervalArrayTwo = array_intersect_key((array)$intervalTwo, array_flip($keys));
+        
+        $deposit = 0;
+        $result = [];
+        foreach($keys as $key) {
+            $res = abs($intervalArrayOne[$key]) - abs($intervalArrayTwo[$key]);
+            if($deposit > 0) {
+                $res -= $deposit;
+                $deposit = 0;
+            }
+            if($res < 0) {
+                $res = 60 - abs($res);
+                $deposit = 1;
+            }
+            $result[$key] = $res;
+        }
 
-        $result = array_map(function($v1, $v2){
-            return abs(abs($v1) - abs($v2));
-        }, $intervalArrayOne, $intervalArrayTwo);
-
+        $result = array_reverse($result);
         return new DateInterval(vsprintf("P%dY%dM%dDT%dH%dM%dS", $result));
     }
 
@@ -705,5 +749,82 @@ class Callcenter extends Model
         $dp = $this->retrieve($dp, $options);
 
         return $dp;
+    }
+
+    public function parseCcMonthlyReportData($data)
+    {
+        $return = [
+            'detail' => [
+                'day' => [
+                    'normal' => [
+                        'duration' => new DateInterval('PT0H'),
+                        'wage' => 0,
+                    ],
+                    'overtime' => [
+                        'duration' => new DateInterval('PT0H'),
+                        'wage' => 0,
+                    ]
+                ],
+                'evening' => [
+                    'normal' => [
+                        'duration' => new DateInterval('PT0H'),
+                        'wage' => 0,
+                    ],
+                    'overtime' => [
+                        'duration' => new DateInterval('PT0H'),
+                        'wage' => 0,
+                    ]
+                ],
+                'overnight' => [
+                    'normal' => [
+                        'duration' => new DateInterval('PT0H'),
+                        'wage' => 0,
+                    ],
+                    'overtime' => [
+                        'duration' => new DateInterval('PT0H'),
+                        'wage' => 0,
+                    ]
+                ],
+            ],
+            'summary' => [
+                'total' => 0,
+                'total_transport_fee' => 0,
+                'grand_total' => 0,
+            ]
+        ];
+
+        
+        $relabelTypes = [
+            'normal' => 'working',
+            'overtime' => 'overtime',
+        ];
+        foreach($data as $each) {
+            foreach($return['detail'] as $shift => $type) {
+                $duration = $this->durationToInterval($each['actual_'.$relabelTypes['normal'].'_hour_'.$shift.'_shift']);
+                $return['detail'][$shift]['normal']['duration'] = $this->addDateIntervals($return['detail'][$shift]['normal']['duration'], $duration);
+
+                $duration = $this->durationToInterval($each['actual_'.$relabelTypes['overtime'].'_hour_'.$shift.'_shift']);
+                $return['detail'][$shift]['overtime']['duration'] = $this->addDateIntervals($return['detail'][$shift]['overtime']['duration'], $duration);
+
+                $payment_normal = $each['actual_payment_normal_'.$shift];
+                $return['detail'][$shift]['normal']['wage'] += $payment_normal;
+
+                $payment_overtime = $each['actual_payment_overtime_'.$shift];
+                $return['detail'][$shift]['overtime']['wage'] += $payment_overtime;
+
+                $return['summary']['total'] += $payment_normal + $payment_overtime;
+            }
+            $return['summary']['total_transport_fee'] += $each['transport_fee'];
+        }
+
+        $return['summary']['grand_total'] += $return['summary']['total'] + $return['summary']['total_transport_fee'];
+        $return['detail']['day']['normal']['duration'] = $return['detail']['day']['normal']['duration']->format("%H:%I");
+        $return['detail']['day']['overtime']['duration'] = $return['detail']['day']['overtime']['duration']->format("%H:%I");
+        $return['detail']['evening']['normal']['duration'] = $return['detail']['evening']['normal']['duration']->format("%H:%I");
+        $return['detail']['evening']['overtime']['duration'] = $return['detail']['evening']['overtime']['duration']->format("%H:%I");
+        $return['detail']['overnight']['normal']['duration'] = $return['detail']['overnight']['normal']['duration']->format("%H:%I");
+        $return['detail']['overnight']['overtime']['duration'] = $return['detail']['overnight']['overtime']['duration']->format("%H:%I");
+
+        return $return;
     }
 }

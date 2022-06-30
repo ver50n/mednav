@@ -117,7 +117,7 @@
   $( function() {
     targetWageClass = ".wage-info";
     targetShiftClass = ".shift-info";
-    init();
+    // init();
 
     $(targetWageClass).on('click','.add-wage-clone', function() {
       addWageClone();
@@ -134,26 +134,19 @@
       dayWage = el.val();
 
       eveningWage = row.find('.evening-wage')
-      eveningWage.val(Math.floor(eveningWage.attr('rate') * dayWage));
-      setThousandSeparator(eveningWage);
+      eveningWage.val((eveningWage.attr('rate') * dayWage).toFixed(2));
 
       overnightWage = row.find('.overnight-wage')
-      overnightWage.val(Math.floor(overnightWage.attr('rate') * dayWage));
-      setThousandSeparator(overnightWage);
+      overnightWage.val((overnightWage.attr('rate') * dayWage).toFixed(2));
       
       overtimeOvernightWage = row.find('.overtime-overnight-wage')
-      overtimeOvernightWage.val(Math.floor(overtimeOvernightWage.attr('rate') * dayWage));
-      setThousandSeparator(overtimeOvernightWage);
+      overtimeOvernightWage.val((overtimeOvernightWage.attr('rate') * dayWage).toFixed(2));
 
       overtimeWage = row.find('.overtime-wage')
-      overtimeWage.val(Math.floor(overtimeWage.attr('rate') * dayWage));
-      setThousandSeparator(overtimeWage);
+      overtimeWage.val((overtimeWage.attr('rate') * dayWage).toFixed(2));
 
       holidayWage = row.find('.holiday-wage')
-      holidayWage.val(Math.floor(holidayWage.attr('rate') * dayWage));
-      setThousandSeparator(holidayWage);
-
-      setThousandSeparator(el);
+      holidayWage.val((holidayWage.attr('rate') * dayWage).toFixed(2));
     }
 
     function addWageClone() {
@@ -175,7 +168,7 @@
 
     function init() {
       {{count($obj->placeHourlywages) == 0 ? "addWageClone();" : "" }}
-      //{{count($obj->placeShiftHours) == 0 ? "addShiftClone();" : "" }}
+      {{count($obj->placeShiftHours) == 0 ? "addShiftClone();" : "" }}
     }
 
     function addShiftClone() {

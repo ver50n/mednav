@@ -19,24 +19,20 @@
               <div class="form-group">
                 <label>@lang('common.user_id')</label> <span class="e_required">*</span>
                 <input class="form-control form-control-sm"
-                  disabled
-                  readOnly
-                  value="{{ $obj->user->name }}" />
+                  id="user-label"
+                  value="{{ old('user_label') ? old('user_label') : $obj->user->name }}"
+                  placeholder="@lang('common.user_id')" />
+                <input type="hidden" id="user_id" value="{{ old('user_id') ? old('user_id') : $obj->user_id }}" />
               </div>
               <div class="form-group">
                 <label>@lang('common.place_id')</label> <span class="e_required">*</span>
-                @php
-                  $oldValue = old('place_id') ? old('place_id') : $obj->place_id;
-                @endphp
-                <select name="place_id"
-                  id="place_id"
-                  class="form-control form-control-sm">
-                @foreach(App\Models\Place::get() as $each)
-                  <option value="{{$each['id']}}" {{ $oldValue == $each['id'] ? 'selected' : '' }}>
-                    {{ $each['name'] }}
-                  </option>
-                @endforeach
-                </select>
+                <input type="hidden" name="place_id" value="{{ $obj->place_id}}">
+                <input class="form-control form-control-sm"
+                  id="place-label"
+                  readOnly
+                  disabled
+                  value="{{ $obj->place->name }}"
+                  placeholder="@lang('common.place_id')" />
               </div>
               <div class="form-group">
                 <label>@lang('common.date_period')</label> <span class="e_required">*</span>
@@ -255,6 +251,16 @@
                   placeholder="@lang('common.note')">{{ old('note') ? old('note') : $obj->note }}</textarea>
                 <span class="c_form__error-block">{{$errors->first('note')}}</span>
               </div>
+
+              <div class="form-group">
+                <label>@lang('common.actual_payment')</label> <span class="e_required">*</span>
+                <input class="form-control form-control-sm price-field"
+                  name="actual_payment"
+                  id="actual_payment"
+                  value="{{ old('actual_payment') ? old('actual_payment') : $obj->actual_payment }}"
+                  placeholder="@lang('common.actual_payment')" />
+                <span class="c_form__error-block">{{$errors->first('actual_payment')}}</span>
+              </div>
             </div>
           </div>
         </section>
@@ -299,6 +305,16 @@
       stepMinute: 15,
     });
 
+    $("#user-label").autocomplete({
+      source: {!! $userList !!},
+      select: function (event, ui) {
+        $("#user_id").val(ui.item.value)
+        $('#user-label').val(ui.item.label);
+        return false;
+      },
+      minLength: 1
+    });
+    
     $('.simulation').click(function() {
       $.ajax({
         url: '{{ route("manage.callcenter.simulation") }}',

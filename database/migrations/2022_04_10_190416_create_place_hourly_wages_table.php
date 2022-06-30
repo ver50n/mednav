@@ -17,12 +17,12 @@ class CreatePlaceHourlyWagesTable extends Migration
             $table->id();
             $table->integer("place_id");
             $table->string("jobtype");
-            $table->integer("day")->default(0);
-            $table->integer("evening")->default(0);
-            $table->integer("overnight")->default(0);
-            $table->integer("overtime_overnight")->default(0);
-            $table->integer("overtime")->default(0);
-            $table->integer("holiday")->default(0);
+            $table->float("day", 8, 2)->default(0);
+            $table->float("evening", 8, 2)->default(0);
+            $table->float("overnight", 8, 2)->default(0);
+            $table->float("overtime_overnight", 8, 2)->default(0);
+            $table->float("overtime", 8, 2)->default(0);
+            $table->float("holiday", 8, 2)->default(0);
             $table->timestamps();
         });
     }

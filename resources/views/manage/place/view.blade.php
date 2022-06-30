@@ -102,10 +102,10 @@
           <thead>
             <tr>
               <th><label>@lang('common.jobtype')</label></th>
-              <th><label>@lang('common.morning_wage')</label></th>
-              <th><label>@lang('common.noon_wage')</label></th>
-              <th><label>@lang('common.night_wage')</label></th>
-              <th><label>@lang('common.night_overtime_wage')</label></th>
+              <th><label>@lang('common.day_wage')</label></th>
+              <th><label>@lang('common.evening_wage')</label></th>
+              <th><label>@lang('common.overnight_wage')</label></th>
+              <th><label>@lang('common.overtime_overnight_wage')</label></th>
               <th><label>@lang('common.overtime_wage')</label></th>
               <th><label>@lang('common.holiday_wage')</label></th>
             </tr>
@@ -114,10 +114,10 @@
             @foreach($obj->placeHourlyWages as $wage)
             <tr>
               <td><label>@lang('application-constant.JOBTYPE.'.$wage->jobtype)</label></td>
-              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->morning_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['morning'] }}x</small></label></td>
-              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->noon_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['noon'] }}x</small></label></td>
-              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->night_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['night'] }}x</small></label></td>
-              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->night_overtime_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['night_overtime'] }}x</small></label></td>
+              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->day_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['day'] }}x</small></label></td>
+              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->evening_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['evening'] }}x</small></label></td>
+              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->overnight_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overnight'] }}x</small></label></td>
+              <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->overtime_overnight_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime_overnight'] }}x</small></label></td>
               <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->overtime_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['overtime'] }}x</small></label></td>
               <td><label>{{ \App\Utils\NumberUtil::currencyFormat($wage->holiday_wage) }}<br /><small class="disabled">{{ App\Helpers\ApplicationConstant::EXCEPTION_WAGE_RATE['holiday'] }}x</small></label></td>
             </tr>
@@ -151,8 +151,8 @@
             @foreach($obj->placeShiftHours as $shift)
             <tr>
               <td><label>@lang('application-constant.WORKING_SHIFT.'.$shift->shift)</label></td>
-              <td><label>{{ $shift->start_hour->format('H:i') }}</label></td>
-              <td><label>{{ $shift->end_hour->format('H:i') }}</label></td>
+              <td><label>{{ $shift->start_hour }}</label></td>
+              <td><label>{{ $shift->end_hour }}</label></td>
             </tr>
             @endforeach
           </tbody>

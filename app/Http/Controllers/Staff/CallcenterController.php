@@ -105,4 +105,52 @@ class CallcenterController extends Controller
 
     return json_encode($result, JSON_UNESCAPED_UNICODE);
   }
+
+  
+  public function report(Request $request)
+  {
+    $userList = [];
+
+    $obj = new Callcenter();
+    $filters = $request->query('filters');
+    $page = $request->query('page');
+    $sort = $request->query('sort');
+
+    if($filters)
+      $obj->fill($filters);
+      $data = $obj->filter($filters, [
+        'pagination' => false,
+        'page' => $page,
+        'sort' => $sort
+      ]);
+
+    return view($this->viewPrefix.'.report', [
+      'obj' => $obj,
+      'data' => $data,
+      'routePrefix' => $this->routePrefix,
+      'viewPrefix' => $this->viewPrefix,
+    ]);
+  }
+
+  public function reportMonthly(Request $request)
+  {
+    $data = $request->all();
+    $obj = new Callcenter();
+    $filters = $request->query('filters');
+    $sort = $request->query('sort');
+
+    if($filters) {
+      $filters['user_id'] = Auth::user()->id;
+      $obj->fill($filters);
+      $data = $obj->filter($filters, [
+        'pagination' => false,
+        'sort' => $sort
+      ]);
+      $data = $obj->parseCcMonthlyReportData($data);
+    }
+    return view('components.pages.report-cc-monthly', [
+      'obj' => $obj,
+      'data' => $data,
+    ]);
+  }
 }

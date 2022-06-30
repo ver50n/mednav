@@ -79,7 +79,7 @@
       <hr />
       <div class="mycompany-info">
         <div class="mycompany-name">
-          Medical Navigation
+          @lang('common.brand')
         </div>
 
         <div class="mycompany-address">
@@ -167,6 +167,13 @@
         </tr>
       </thead>
       <tbody class="items-container">
+        @php
+          $round = 'ceil';
+          if(Auth::guard('admin')->check())
+            $round = 'floor';
+          if(Auth::guard('web')->check())
+            $round = 'ceil';
+        @endphp
         <tr>
           <td>@lang('application-constant.WORKING_SHIFT.day')</td>
           <td>{{ $obj->actual_working_hour_day_shift }}</td>
@@ -195,11 +202,11 @@
       <tfoot>
         <tr>
           <td colspan="5">@lang('common.total-normal')</td>
-          <td><span id="totalWorkingHourPayment">{{ App\Utils\NumberUtil::currencyFormat($obj->actual_working_hour_payment) }}</span></td>
+          <td><span id="totalWorkingHourPayment">{{ App\Utils\NumberUtil::currencyFormat($obj->actual_working_hour_payment, ['round' => $round]) }}</span></td>
         </tr>
         <tr>
           <td colspan="5">@lang('common.total-overtime')</td>
-          <td><span id="totalOvertimeHourPayment">{{ App\Utils\NumberUtil::currencyFormat($obj->actual_overtime_hour_payment) }}</span></td>
+          <td><span id="totalOvertimeHourPayment">{{ App\Utils\NumberUtil::currencyFormat($obj->actual_overtime_hour_payment, ['round' => $round]) }}</span></td>
         </tr>
         <tr>
           <td colspan="5">@lang('common.transport_fee')</td>
@@ -207,7 +214,7 @@
         </tr>
         <tr>
           <td colspan="5">@lang('common.total')</td>
-          <td><span id="grandtotal">{{ App\Utils\NumberUtil::currencyFormat($obj->user_payment) }}</span></td>
+          <td><span id="grandtotal">{{ App\Utils\NumberUtil::currencyFormat($obj->user_payment, ['round' => $round]) }}</span></td>
         </tr>
       </tfoot>
     </table>

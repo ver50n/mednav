@@ -28,13 +28,25 @@ class NumberUtil
             'decimal_format' => '.',
             'decimal_place' => 0,
             'operator' => '',
+            'round' => 'floor',
         ];
         $mergedOptions = array_merge(
             $defaultOptions,
             $options
         );
+
+        if(isset($mergedOptions['round'])) {
+            if ($mergedOptions['round'] == 'floor') {
+                $nominal = floor($nominal);
+            } else if ($mergedOptions['round'] == 'ceil') {
+                $nominal = ceil($nominal);
+            } else if ($mergedOptions['round'] == 'round') {
+                $nominal = round($nominal);
+            }
+        }
+
         $nominal = self::numberFormat($nominal, $mergedOptions);
-        $nominal = self::CURRENCY['prefix'][$currency].' '.$mergedOptions['operator'].' '.$nominal;
+        $nominal = $mergedOptions['operator'].' '.$nominal." 円";
 
         return $nominal;
     }

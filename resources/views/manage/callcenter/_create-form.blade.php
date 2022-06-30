@@ -19,14 +19,13 @@
             <div class="card-body">
               <div class="form-group">
                 <label>@lang('common.user_id')</label> <span class="e_required">*</span>
-                <select name="user_id"
-                  class="form-control form-control-sm">
-                @foreach(App\Models\User::get() as $each)
-                  <option value="{{$each['id']}}" {{ $each['id'] == old('user_id') ? 'selected' : '' }}>
-                    {{ $each['name'] }}
-                  </option>
-                @endforeach
-                </select>
+                <input class="form-control form-control-sm"
+                  name="user_label"
+                  id="user-label"
+                  value="{{ old('user_label') }}"
+                  placeholder="@lang('common.user_id')" />
+                <input type="hidden" id="user_id" value="{{old('user_id')}}" />
+                <span class="c_form__error-block">{{$errors->first('user_id')}}</span>
               </div>
               <div class="form-group">
                 <label>@lang('common.place_id')</label> <span class="e_required">*</span>
@@ -39,6 +38,7 @@
                   </option>
                 @endforeach
                 </select>
+                <span class="c_form__error-block">{{$errors->first('place_id')}}</span>
               </div>
               <div class="form-group">
                 <label>@lang('common.date_period')</label> <span class="e_required">*</span>
@@ -127,6 +127,16 @@
       dateFormat: "yy-mm-dd",
       timeFormat: "HH:mm:ss",
       stepMinute: 15,
+    });
+
+    $("#user-label").autocomplete({
+      source: {!! $userList !!},
+      select: function (event, ui) {
+        $("#user_id").val(ui.item.value)
+        $('#user-label').val(ui.item.label);
+        return false;
+      },
+      minLength: 1
     });
   });
 </script>

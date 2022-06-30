@@ -12,14 +12,11 @@
       </div>
       
       <div class="grid-action">
-        <form action="{{route('helpers.export').'?'.http_build_query(Request::query())}}" method="POST">
-          @csrf
-          <input type="hidden" name="model" value="Callcenter" />
-          
+        <a href="{{route($routePrefix.'.report')}}">
           <button class="btn btn-outline-secondary">
-            <i class="c_icon fas fa-file-export menu-icon"></i> @lang('common.export')
+            <i class="c_icon fas fa-file-export menu-icon"></i> @lang('common.wage-report')
           </button>
-        </form>
+        </a>
       </div>
     </div>
     <table class="grid-table table table-striped table-bordered table-responsive-sm">

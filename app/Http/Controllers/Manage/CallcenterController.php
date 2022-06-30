@@ -40,11 +40,15 @@ class CallcenterController extends Controller
   public function create()
   {
     $obj = new Callcenter();
+    $userList = [];
+    $userList = \App\Models\User::select("name as label", "id as value")->get()->toArray();
 
+    
     return view($this->viewPrefix.'.create', [
       'obj' => $obj,
       'routePrefix' => $this->routePrefix,
-      'viewPrefix' => $this->viewPrefix
+      'viewPrefix' => $this->viewPrefix,
+      'userList' => json_encode($userList, JSON_UNESCAPED_UNICODE)
     ]);
   }
 
@@ -70,11 +74,14 @@ class CallcenterController extends Controller
   public function update(Request $request)
   {
     $obj = Callcenter::findOrFail($request->id);
+    $userList = [];
+    $userList = \App\Models\User::select("name as label", "id as value")->get()->toArray();
 
     return view($this->viewPrefix.'.update', [
       'obj' => $obj,
       'routePrefix' => $this->routePrefix,
-      'viewPrefix' => $this->viewPrefix
+      'viewPrefix' => $this->viewPrefix,
+      'userList' => json_encode($userList, JSON_UNESCAPED_UNICODE)
     ]);
   }
 
@@ -121,12 +128,60 @@ class CallcenterController extends Controller
   public function simulation(Request $request)
   {
     $data = $request->all();
-    $cc = CallCenter::find($data['id']);
+    $cc = Callcenter::find($data['id']);
     $cc->fill($data);
     $result = $cc->calculateSimulation();
 
     $result['period'] = date_format(date_create($result['period']), 'Y年m月d日 (').Lang::get('application-constant.DAY_OF_WEEK.'.date_format(date_create($result['period']), 'N')).')';
 
     return json_encode($result, JSON_UNESCAPED_UNICODE);
+  }
+
+  public function report(Request $request)
+  {
+    $userList = [];
+
+    $userList = \App\Models\User::select("name as label", "id as value")->get()->toArray();
+    $obj = new Callcenter();
+    $filters = $request->query('filters');
+    $page = $request->query('page');
+    $sort = $request->query('sort');
+
+    if($filters)
+      $obj->fill($filters);
+      $data = $obj->filter($filters, [
+        'pagination' => false,
+        'page' => $page,
+        'sort' => $sort
+      ]);
+
+    return view($this->viewPrefix.'.report', [
+      'obj' => $obj,
+      'data' => $data,
+      'routePrefix' => $this->routePrefix,
+      'viewPrefix' => $this->viewPrefix,
+      'userList' => json_encode($userList, JSON_UNESCAPED_UNICODE)
+    ]);
+  }
+
+  public function reportMonthly(Request $request)
+  {
+    $data = $request->all();
+    $obj = new Callcenter();
+    $filters = $request->query('filters');
+    $sort = $request->query('sort');
+
+    if($filters) {
+      $obj->fill($filters);
+      $data = $obj->filter($filters, [
+        'pagination' => false,
+        'sort' => $sort
+      ]);
+      $data = $obj->parseCcMonthlyReportData($data);
+    }
+    return view('components.pages.report-cc-monthly', [
+      'obj' => $obj,
+      'data' => $data,
+    ]);
   }
 }
