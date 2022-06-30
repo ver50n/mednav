@@ -22,7 +22,7 @@
                   id="user-label"
                   value="{{ old('user_label') ? old('user_label') : $obj->user->name }}"
                   placeholder="@lang('common.user_id')" />
-                <input type="hidden" id="user_id" value="{{ old('user_id') ? old('user_id') : $obj->user_id }}" />
+                <input type="hidden" id="user_id" name="user_id" value="{{ old('user_id') ? old('user_id') : $obj->user_id }}" />
               </div>
               <div class="form-group">
                 <label>@lang('common.place_id')</label> <span class="e_required">*</span>

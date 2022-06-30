@@ -36,7 +36,7 @@ class CreateCallcentersTable extends Migration
             $table->time("actual_rest_hour_day_shift")->default("00:00");
             $table->time("actual_rest_hour_evening_shift")->default("00:00");
             $table->time("actual_rest_hour_overnight_shift")->default("00:00");
-            $table->float("actual_payment_normal_day"), 8, 2->default(0);
+            $table->float("actual_payment_normal_day", 8, 2)->default(0);
             $table->float("actual_payment_normal_evening", 8, 2)->default(0);
             $table->float("actual_payment_normal_overnight", 8, 2)->default(0);
             $table->float("actual_payment_overtime_day", 8, 2)->default(0);

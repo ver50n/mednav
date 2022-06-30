@@ -24,7 +24,7 @@
                   id="user-label"
                   value="{{ old('user_label') }}"
                   placeholder="@lang('common.user_id')" />
-                <input type="hidden" id="user_id" value="{{old('user_id')}}" />
+                <input type="hidden" id="user_id" name="user_id" value="{{old('user_id')}}" />
                 <span class="c_form__error-block">{{$errors->first('user_id')}}</span>
               </div>
               <div class="form-group">
@@ -132,7 +132,7 @@
     $("#user-label").autocomplete({
       source: {!! $userList !!},
       select: function (event, ui) {
-        $("#user_id").val(ui.item.value)
+        $("#user_id").val(ui.item.value);
         $('#user-label').val(ui.item.label);
         return false;
       },
