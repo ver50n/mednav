@@ -20,7 +20,6 @@
               <div class="form-group">
                 <label>@lang('common.user_id')</label> <span class="e_required">*</span>
                 <input class="form-control form-control-sm"
-                  name="user_label"
                   id="user-label"
                   value="{{ old('user_label') }}"
                   placeholder="@lang('common.user_id')" />
